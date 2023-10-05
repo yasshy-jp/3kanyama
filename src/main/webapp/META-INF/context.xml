@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration>
+<!-- 上記はEclipseの警告を消すための記述です。 -->
+<!-- 
+本ファイルはWebアプリケーションの設定ファイル。（ SBCreative p43 ）
+Serversのserver.xmlでも同様の設定ができるが、こっちの方が優先される模様(リロード設定で確認)
+-->
+
+<Context reloadable="true">
+<!--
+↑自動リロードの設定。※但し、新しいソースファイルをコンパイルした時は動かん。
+既に存在するクラスファイルを書き換えて再コンパイルした時のみ動作。
+デプロイ時は、Tomcatが常にファイル監視を行うため低速になるので解除したほうが良い。
+-->
+
+	<!-- 
+	↓データソース（アプリケーションサーバを利用してDBに接続する仕組み）の設定。
+	コネクションプールも使用可能になる。( SBCreative p182,196-198 ) -->
+	<Resource
+		name="jdbc/SBCreative"
+		auth="Container"
+		type="javax.sql.DataSource"
+		driverClassName="org.h2.Driver"
+		url="jdbc:h2:tcp://localhost/~/DB/docoTsubu"
+		username="yasushi"
+		password="8afdetH2d"
+	/>
+</Context>

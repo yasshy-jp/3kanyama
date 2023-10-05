@@ -1,0 +1,433 @@
+@charset"UTF-8";
+/* =========================================== タブレット向けレイアウト（１） ============================================= */
+/* ブレイクポイントが1000px以下の時のメディアクエリを設定 */
+@media (max-width: 1000px) {
+    header {
+        padding-left: 13px;
+    }
+    
+    .salonName {
+    	font-size: 24px;
+    }
+    
+    .header-right a {
+        padding: 0 10px;
+    }
+
+    #top-wrapper h1 {
+        font-size: 38px;
+    }
+
+    #top-wrapper h2 {
+        font-size: 34px;
+    }
+
+	#top-wrapper p {
+        font-size: 15px;
+    }
+
+    .top-wrapper_contact h2 {
+        font-size: 28px;
+    }
+
+    .top-wrapper_mente h2 {
+        font-size: 24px;
+    }
+
+    .heading h2 {
+        font-size: 25px;
+    }
+
+	.translation {
+		font-size: 11px;
+	}
+
+/* -------------------- about-wrapper ------------------- */
+	.about-wrapper h3 {
+        font-size: 13px;
+    }
+
+    #farmData {
+    	padding: 25px 0%;
+        flex-direction: column;
+        /* 子要素を縦一列に表示するために親側に設定する */    	
+    }
+    #about-wrapper .farmPic {
+        margin: 0 auto 30px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    #about-wrapper .farmPic img {
+    	width: 100%;
+    	max-width: 600px;
+    	height: 100%;
+    	max-height: 500px
+    }
+    
+    #about-wrapper .farmInfo {
+    	margin: 0 auto;
+        width: 100%;
+    }
+    
+/* ----------------- Product-wrapper -------------------- */
+	#product-wrapper .item {
+	    width: 50%;
+	}
+	
+	#product-wrapper .item-icon img {
+		 width: 260px;
+		 height: 260px;
+	}
+	
+/* -------------------- shop-wrapper -------------------- */
+	#shop-wrapper .itemForm {
+	    width: 50%;
+	}
+
+/* -------------------- cart-wrapper -------------------- */
+	#cart-wrapper .cartArea {
+        flex-direction:column-reverse;
+        /* 子要素を縱並びにする(Flexbox) */
+    }
+
+    #cart-wrapper .cartArea-left {
+    	width: 100%;
+    	margin: 0 auto;
+    	padding: 10px 0px 10px 28px;
+        margin-bottom: 30px;
+        margin-top: -30px;
+        order: 2;
+	}
+	
+	#cart-wrapper .cartArea-left .btn-regi_or_con {
+		display: flex;
+	}
+	
+	#cart-wrapper .cartArea-left .continue {
+		margin-top: 10px;
+	}
+	
+	#cart-wrapper .cartArea-right {
+		width: 100%;
+    	margin: 0 auto;
+        margin-bottom: 30px;
+        order: 1;
+	}
+	
+/* -------------------- purchase-wrapper -------------------- */
+	#purchase-wrapper .purchaseArea {
+        flex-direction:column-reverse;
+        /* 子要素を縱並びにする(Flexbox) */
+    }
+
+    #purchase-wrapper .purchase-left {
+    	width: 100%;
+    	margin: 0 auto;
+        margin-bottom: 30px;
+        margin-top: -30px;
+        order: 2;
+	}
+
+	#purchase-wrapper .purchase-left .text {
+		width: 100%;
+	}
+				
+	#purchase-wrapper .purchase-right {
+		width: 100%;
+    	margin: 0 auto;
+        margin-bottom: 30px;
+        order: 1;
+	}
+
+/* ------------- register-wrapper ----------------- */
+	#register-wrapper .registerForm {
+		padding: 0 5%;
+	}
+	
+	#register-wrapper .textbox {
+		width: 100%;
+	}
+	
+}
+/* -------------------- gallery-wrapper ----------------- */
+	@media (max-width: 768px) {
+    	section.fixed:first-of-type {
+    	padding-top: 0px;
+    }    
+}
+
+/* ============================================ タブレット向けレイアウト（２） ============================================ */
+/* ブレイクポイントが720px以下の時のメディアクエリを設定 */
+@media (max-width: 720px) {
+/* ------------------------ header ----------------------- */	
+	header {
+        padding-right: 0;
+    }
+	
+/* --------------- PCタブレット用メニュー非表示 ----------------*/
+    .header-right {
+        display: none;
+    }
+
+/* ----------------- ハンバーガーメニューの表示 --------------- */
+    #humburger_menu {
+        display: block;
+    }
+}    
+
+/* =============================================== スマホ向けレイアウト（１） ============================================= */
+/* ブレイクポイントが670px以下の時のメディアクエリを設定 */
+@media (max-width: 670px) {
+/* ----------------------- top-wrapper -------------------- */
+    #top-wrapper {
+        padding-top: 130px;
+    }
+ 
+    #top-wrapper h1 {
+        font-size: 27px;
+        text-align: left;
+        letter-spacing: 10px;
+    }
+
+    #top-wrapper h2 {
+        font-size: 27px;
+        text-align: left;
+        letter-spacing: 5px;
+    }
+
+    #top-wrapper p {
+        text-align: left;
+    }
+    
+    #top-wrapper .btn-wrapper p {
+    	text-align: center;
+    }
+    
+/* -------------------- about-wrapper --------------------- */
+	.digest {
+        font-size: 14px;
+        text-align: left;
+    }
+/* ------------------- Product-wrapper -------------------- */
+	#product-wrapper {
+		padding-left: 0;
+    	padding-right: 0;
+	}
+	
+	#product-wrapper .items {
+        flex-direction:column;
+        /* 子要素を縱並びにする(Flexbox) */
+        padding-bottom: 0;
+    }
+
+    #product-wrapper .item {
+    	width: 100%;
+    	margin: 0 auto;
+        margin-bottom: 50px;
+	}
+	
+	#product-wrapper .item-icon img {
+		width: 300px;
+		height: 300px;
+	}
+
+/* ---------------------- shop-wrapper -------------------- */
+	#shop-wrapper .itemLists {
+	    flex-direction:column;
+        /* 子要素を縱並びにする(Flexbox) */	
+	}
+	
+	#shop-wrapper .itemForm {
+		margin: 0 auto;
+		width: 100%;
+        margin-bottom: 50px;
+	}
+
+/* ---------------------- access-wrapper ----------------- */
+ 	#access-wrapper .heading {
+ 		padding-bottom: 25px;
+ 	}
+    
+/* ------------------------ footer ----------------------- */
+    footer {
+        text-align: center;
+        padding-right: 0;
+        padding-left: 0;
+    }
+
+    .sns {
+        font-size: 18px;
+    }
+    
+    .void_sns {
+        margin-right: 18px;
+    }
+
+/* ------------------ ページの先頭へ戻るボタン ---------------- */
+    #scrollTop {
+        border-radius   : 25px;
+        height          : 50px;
+        width           : 50px;
+        right           : 15px;
+        bottom          : 15px;
+    }
+
+    #scrollTop a {
+        font-size: 23px;
+        top            : 12px;
+    }
+
+/* -------------------- contact-wrapper ------------------- */
+    .contact-wrapper p {
+        font-size: 14px;
+    }
+
+    .radio {
+        font-size: 14px;
+    }
+
+    .txt{
+        width: 100%;
+    }
+    
+    .txtarea {
+        width: 100%;
+    }
+
+    .submit {
+        width: 100%;
+    }
+    
+    /* ------------- register-wrapper ----------------- */
+	#register-wrapper .registerForm {
+		padding: 0;
+	}
+    
+    #register-wrapper .registerForm p {
+		font-size: 13px;
+	}
+
+	#register-wrapper .registerForm span {
+		font-size: 13px;
+	}
+}
+
+/* =============================================== スマホ向けレイアウト（２） ============================================= */
+/* ブレイクポイントが620px以下の時のメディアクエリを設定 */
+/* 数量変更セレクタと更新ボタンサイズアップ */
+/* ---------------------- cart-wrapper -------------------- */
+	@media (max-width: 620px) {
+		#cart-wrapper .cartArea-right .recount {
+		font-size: 20px;
+	}
+	
+	#cart-wrapper .cartArea-right .update {
+		font-size: 18px;
+	}
+}
+
+/* =============================================== スマホ向けレイアウト（３） ============================================= */
+/* ブレイクポイントが466px以下の時のメディアクエリを設定 */
+/* ---------------------- cart-wrapper -------------------- */
+	@media (max-width: 466px) {
+	#cart-wrapper .container {
+	    padding: 1px;
+	}
+
+	#cart-wrapper .cartArea-left .tax {
+		font-size: 12px;
+	}
+	
+	#cart-wrapper .cartArea-left .total {
+		font-size: 14px;
+	}
+
+	#cart-wrapper .cartArea-left .register {
+		width: 180px;
+		font-size: 14px;		
+	} 
+	
+	#cart-wrapper .cartArea-left .continue {
+		width: 180px;
+		font-size: 14px;
+	}
+	
+    #cart-wrapper .cartArea-left {
+    	padding: 10px 0px 10px 0px;
+	}
+			
+	#cart-wrapper .cartArea-right .line1 {
+		padding: 5px 0px 5px;
+		font-size: 12px;
+	}
+
+	#cart-wrapper .cartArea-right .line2 {
+		padding: 10px 3px 5px;
+	}
+
+	#cart-wrapper .cartArea-right .line3 {
+		padding: 5px 0px 5px;
+		font-size: 13px;
+		word-wrap: break-word;
+	}
+
+	#cart-wrapper .cartArea-right .line4 {
+		padding: 5px 0px 5px 5px;
+		font-size: 13px;
+	}
+	
+	#cart-wrapper .cartArea-right .line5 {
+		padding: 5px;
+	}
+
+}
+
+/* ---------------------- purchase-wrapper -------------------- */
+	@media (max-width: 466px) {
+	#purchase-wrapper .container {
+	    padding: 5px;
+	}
+	
+	#purchase-wrapper .purchase-left .tax {
+		font-size: 12px;
+	}
+	
+	#purchase-wrapper .purchase-left .total {
+		font-size: 14px;
+	}
+	
+	#purchase-wrapper .pay {
+			font-size: 14px;
+	}
+	
+	#purchase-wrapper .cardnumber {
+			font-size: 12px;
+	}
+	
+	#purchase-wrapper .purchase-right .line1 {
+		padding: 5px 0px 5px;
+		font-size: 12px;
+	}
+
+	#purchase-wrapper .purchase-right .line2 {
+		padding: 10px 3px 5px;
+	}
+
+	#purchase-wrapper .purchase-right .line3 {
+		padding: 5px 0px 5px;
+		font-size: 13px;
+		word-wrap: break-word;
+	}
+
+	#purchase-wrapper .purchase-right .line4 {
+		padding: 5px 0px 5px 5px;
+		font-size: 13px;
+	}
+	
+	#purchase-wrapper .purchase-right .line5 {
+		padding: 5px;
+		font-size: 13px;
+	}
+	
+}

@@ -1,0 +1,1003 @@
+@charset"UTF-8";
+/* ウェブフォントの読込み */
+@import url(http://fonts.googleapis.com/css?family=Antic+Didone);
+/* ===================================================== 一 般 =========================================================*/
+/* スムーズスクロール */
+html { scroll-behavior: smooth;}
+
+/* 全ての要素に対し、borderとpaddingを要素サイズに含める */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: "Hiragino Kaku Gothic ProN";
+}
+
+a {
+    text-decoration: none;
+}
+
+.container {
+	width: 100%;
+    max-width: 1170px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+/* --------------------------- heading ---------------------------- */
+.heading {
+    padding-top: 80px;
+    padding-bottom: 50px;
+    color: #5f5d60;
+}
+
+.heading h2 {
+    font-weight: normal;
+    font-size: 35px;
+    margin-bottom: 0px;
+}
+
+.translation {
+    margin-top: 5px;
+    margin-bottom: 30px;
+    font-size: 13px;
+    letter-spacing: 3px;
+}
+
+.translation_notes {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color:  #C03647;
+    letter-spacing: 3px;
+}
+
+.digest {
+	font-size: 15px;
+	line-height: 1.8;
+}
+
+/* ------------------------- ボタン(基本) --------------------------- */
+.btn {
+    padding: 7px 10px;
+    color: white;
+    display: inline-block;
+    opacity: 0.85;
+    border-radius: 4px;
+    text-align: center;
+    cursor: pointer;
+    border-style: none;
+}
+
+/* マウスが要素に重なった時のアクション */
+.btn:hover {
+    opacity: 1;
+}
+
+/* -------------------------- ボタン(大) -----------------------------*/
+.btnBig {
+    background-color: rgba(81, 124, 28, 0.9);
+    padding: 15px 40px;
+    box-shadow: 0px 7px #2F4710;
+    /* 左右方向と上下方向に影を付ける */
+}
+
+/* btnBigクラスがクリックされている時のCSSを指定 */
+.btnBig:active {
+    /* 影を消す設定 */
+    box-shadow: none;
+    /* 基準位置設定ではない。要素の位置を動かす設定。topやleftと併用で有効になる */
+    position: relative;
+    top: 7px;
+}
+
+/* --------------------- ページの先頭へ戻るボタン ---------------------- */
+#scrollTop {
+    border-radius: 35px;
+    height: 70px;
+    width: 70px;
+    background-color: #FF8F22;
+    opacity: 0.9;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
+    text-align: center;
+}
+
+#scrollTop a {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 30px;
+    /* 相対配置(p253) */
+    position: relative;
+    top: 14px;
+    /* ブロックレベル要素へ変更。親要素を含めた全体がクリック可能になる */
+    display: block;
+}
+
+#scrollTop:hover {
+    opacity: 1;
+}
+
+/* =================================================== header =========================================================*/
+/* -------------- header全般 -------------- */
+header {
+    height: 70px;
+    width: 100%;
+    padding: 0 15px 0 27px;
+    background-color: rgba(255, 255, 255, 0.97);
+    /* rgbaによる背景色のみの透明化 */
+    border-bottom: 1px solid #ddd;
+    position: fixed;
+    /* 要素の固定。スクロールしても動かん。top等の配置位置指示のプロパティと組み合せて使用 */
+    top: 0px;
+    /* 要素の重なり順の指定 */
+    z-index: 10;
+}
+
+/* ------------------- header-left --------------- */
+.header-left {
+    float: left;
+    height: 70px;
+    width: 210px;
+    text-align: left;
+}
+
+.header-left a:hover {
+	opacity: 0.7;
+}
+
+.miniLogo{
+	opacity: 0.75;
+	vertical-align: bottom;
+	display: inline-block;
+	margin-bottom: 2px;
+}
+
+.fa-leaf {
+	font-size: 35px;
+}
+
+.salonName {
+    font-size: 26px;
+    color: #5f5d60;
+    font-weight: bold;
+    /* 文字間隔 */
+    letter-spacing: 1.6px;
+    /* 親要素高さと同値にすることでテキストを高さ方向の中央に配置 */
+    line-height: 70px;
+    /* ウェブフォント指定 */
+    font-family  : 'Antic Didone', serif;
+}
+
+/* ---------- スマホ用ハンバーガーメニュー ---------- */
+#humburger_menu {
+    float: right;
+    width: 70px;
+    height: 50px;
+    margin: 0;
+    display: none;
+}
+
+#humburger_menu dt {
+    font-size: 35px;
+    margin: 10px 0;
+
+}
+
+/* ---------------------- ハンバーガー(Jquery) --------------------- */
+/* ハンバーガーメニュー3本線が×に */
+/*ボタン外側※レイアウトによってpositionや形状は適宜変更のこと*/
+
+.openbtn{
+/*ボタン内側の基点となるためrelativeを指定。
+追従するナビゲーションの場合はfixed＋top、rightといった位置をセットで指定*/
+	position: relative;
+    /*background-color: rgba(34, 49, 52, 0.9);*/
+    /* マウス重なると指に変換 */
+	cursor: pointer;
+    width: 70px;
+    height:50px;
+	border-radius: 5px;
+}
+
+/*ボタン内側*/
+.openbtn span{
+    display: inline-block;
+    transition: all .4s;/*アニメーションの設定*/
+    position: absolute;
+    left: 20px;
+    height: 3px;
+    border-radius: 1.5px;
+	background: #5f5d60;
+  	width: 47%;
+  }
+
+.openbtn span:nth-of-type(1) {
+	top: 11px;
+}
+
+.openbtn span:nth-of-type(2) {
+	top:23px;
+}
+
+.openbtn span:nth-of-type(3) {
+	top:35px;
+}
+
+/*activeクラスが付与されると線が回転して×に*/
+
+.openbtn.active span:nth-of-type(1) {
+    top: 18px;
+    left: 18px;
+    transform: translateY(6px) rotate(-45deg);
+    width: 40%;
+}
+
+.openbtn.active span:nth-of-type(2) {
+	opacity: 0;/*真ん中の線は透過*/
+}
+
+.openbtn.active span:nth-of-type(3){
+    top: 30px;
+    left: 18px;
+    transform: translateY(-6px) rotate(45deg);
+    width: 40%;
+}
+/* ------------------- ここまでハンバーガー(Jquery) ------------------ */
+
+/* ドロップダウンの要素 */
+#humburger_menu dd {
+    background-color: rgba(255, 255, 255, 0.9);
+    text-align: center;
+    border: solid 1px #ddd;
+    width: 235px;
+    margin-left: -165px;
+    display: none;
+}
+
+#humburger_menu a {
+    color: #5f5d60;
+    line-height: 70px;
+    /* ブロック要素にしてリンク範囲を親要素まで拡大 */
+    display: block;
+}
+
+#humburger_menu a:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+/* ------------------------- header-right -------------------------- */
+.header-right {
+    float: right;
+    margin-right: -17px;
+}
+
+.header-right a {
+	float: left;
+    line-height: 70px;
+    /* 行間調整の応用。親要素(header)の高さの中心に文字が配置されるよう、親要素と同じheight値を設定 */
+ 	color: #5f5d60;
+    font-size: 14px;
+    padding: 0 15px;
+    display: block;
+    /* ブロック要素にしてリンク範囲を親要素まで拡大 */
+    transition: all 0.5s;
+    /* アニメーションの「変化対象」と「変化時間」の指定。hover（次項）とセットで使用 */
+}
+
+.header-right a:hover {
+    background-color: rgba(233, 225, 209, 0.65);
+    /* マウスが重なった時のアクション（前項のアニメーションと連携） */
+}
+
+.header-right a:last-child {
+  padding-right: 20px;
+}
+
+#iconHead {
+    font-size: 27px;
+}
+
+/* ============================================== top-wrapper(キャッチコピー) ===========================================*/
+#top-wrapper {
+    padding: 180px 0 20px 0;
+    /* 背景画像 */
+    background-image: url("../images/WelcomPic_farm.jpg");
+    background-size: cover;
+    background-position: center;
+    color: white;
+    text-align: center;
+    font-family  : 'Antic Didone', serif;
+	/* ウェブフォント指定 */
+}
+
+#top-wrapper h1 {
+    /* 要素を透明 */
+    opacity: 0.9;
+    font-size: 48px;
+    letter-spacing: 20px;
+}
+
+#top-wrapper h2 {
+    /* 要素を透明 */   
+    opacity: 0.9;
+    font-size: 40px;
+    letter-spacing: 7px;
+}
+
+#top-wrapper p {
+    /* 要素を透明 */
+    font-size: 17px;
+}
+
+/* ================================================ btn-wrapper(ボタン) ================================================*/
+#top-wrapper .btn-wrapper {
+    margin: 200px 0 30px;
+}
+
+#top-wrapper .btn-wrapper p {
+    margin: 10px 0;
+}
+
+#top-wrapper .btn-wrapper .twitter {
+    background-color: #4784BF;
+    margin-right: 20px;
+    font-size: 30px;
+}
+  
+.btn-wrapper .line {
+    background-color: #00A95F;
+    margin-right: 20px;
+    font-size: 30px;
+}
+
+#top-wrapper .btn-wrapper .instagram {
+    background-color: #CA4684;
+    font-size: 30px;
+}
+/* ================================================ about-wrapper ==================================================== */
+#about-wrapper {
+    padding-bottom: 100px;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #5f5d60;
+}
+
+#about-wrapper h3 {
+	/* Farm data */
+	font-weight: normal;
+	font-size: 15px;
+}
+
+/* ------------------------ Farm data  -------------------------- */
+#farmData {
+	    /* Flexbox_子要素を横並びにする */
+    display: flex;
+	padding: 50px 3.5%;
+	margin-bottom: 30px;
+}
+
+/* --- 農園写真 ------------------- */
+#about-wrapper .farmPic{
+    /* Flexbox_親要素に合わせて画面幅一杯に広がる */
+    flex: auto;
+	width: 30%;
+	min-width: 300px;
+	text-align: left;
+	vertical-align: bottom;
+	    /*画像はインライン要素なのでベースラインに揃い、下端に余白が発生。それを消す処理 */
+}
+
+#about-wrapper .voidFarmdata {
+	min-width: 25px;
+}
+
+/* --- 農園データ ------------------ */
+#about-wrapper .farmInfo {
+	    /* Flexbox_親要素に合わせて画面幅一杯に広がる */
+    flex: auto;
+    width     : 35%;
+    min-width: 300px;
+}
+
+#about-wrapper .farmInfo p {
+	text-align: left;
+	line-height: 1.6;
+	font-size: 14px;
+	margin-top: 0;
+}
+
+#about-wrapper .farmInfo table {
+    width          : 100%;
+    /* テキストが短い場合、親要素の横幅いっぱいに広がらんため、width指定 */
+    margin-top: 30px;
+    border-collapse: collapse;
+    font-size    : 14px;
+    line-height  : 1.429;
+    text-align   : left;
+    line-height: 1.8;
+}
+
+#about-wrapper .farmInfo table th {
+	padding: 10px 10px 10px 5px;
+    white-space  : nowrap;
+    /* 表形式は項目幅がテキスト長で自動で決まるので折返しが発生するが、それを禁止する(p266) */
+    border-bottom: 1px solid white;
+    background-color: rgba(159, 160, 160, 0.2);
+}
+
+#about-wrapper .farmInfo table td {
+	border-bottom: 1px solid white;
+	background-color: #f0f0f0;
+	padding: 10px 0 10px 20px;
+    width: 100%
+        /* table要素の横幅を100%にすると、td幅はテキスト長さで自動決定しth幅が伸びる。
+        そこでtd要素のwidthを100%にし、短くてもtd側が幅いっぱいに広がるようにする(p268) */
+}
+
+/* ================================================== product-wrapper =================================================*/
+#product-wrapper {
+    padding-bottom: 100px;
+    padding-left: 5%;
+    padding-right: 5%;
+    background-color: #FCF2ED;
+    text-align: center;
+}
+
+#product-wrapper .items {
+    display: flex;
+    /* 子要素を横並びにする(Flexbox) */
+    flex-wrap: wrap;
+    /* 子要素を折り返す(Flexbox) */
+    padding-bottom: 50px;
+}
+
+#product-wrapper .item {
+    flex: auto;
+    /* 親要素の幅に合わせて要素幅を伸縮させる(Flexbox) */
+    width: 25%;
+    /* 折り返しの列数に応じて子要素の幅を設定 */
+}
+
+#product-wrapper .item-icon {
+    /* 要素同士を重ねる。(親)要素の左上を基準位置に設定 */
+    position: relative;
+}
+
+#product-wrapper .item-icon a:hover {
+	opacity: 0.7;
+}
+
+#product-wrapper .item-icon p {
+    /* 要素同士を重ねる。(子)要素の設定。サイト全体の左上が基準 */
+    position: absolute;
+    top: 30%;
+    width: 100%;
+    color: white;
+    font-weight: bold;
+    font-size: 28px;
+    letter-spacing: 3.6px;
+}
+
+#product-wrapper .txt-contents {
+    width: 80%;
+    display: inline-block;
+    /* インラインブロック要素へ変更。元はブロック要素なので、横並びが可能にはなるが、
+    何故、これをしないとテキストが中央揃えにならんの？ */
+    margin: 15px;
+    font-size: 13px;
+    color: #b3aeb5;
+}
+
+/* =================================================== shop-wrapper ===================================================*/
+#shop-wrapper {
+	background-color: #FFFFFF;
+    color: #5f5d60;
+	text-align: center;
+	padding-bottom: 100px;
+}
+
+#shop-wrapper .searchText {
+	display: inline-block;
+	margin-right: 30px;
+}
+
+#shop-wrapper .searchItem {
+	display: inline-block;
+	margin-right: 30px;
+}
+
+#shop-wrapper .searchItem select {
+	color: #5f5d60;
+}
+
+#shop-wrapper .allproduct {
+	display: inline-block;	
+}
+
+#shop-wrapper .itemLists {
+	display: flex;
+    /* 子要素を横並びにする(Flexbox) */
+    flex-wrap: wrap;
+    /* 子要素を折り返す(Flexbox) */
+}
+
+#shop-wrapper .itemForm {
+	/*flex: auto;
+    /* 親要素の幅に合わせて要素幅を伸縮させる(Flexbox) */
+    width: 33.333%;
+    /* 折り返しの列数に応じて子要素の幅を設定 */
+    margin-bottom: 70px;
+}
+
+#shop-wrapper .itemList {
+	border-collapse: collapse;
+	border: solid 1px #CCCCCC;
+	margin: 0 auto;
+}
+
+#shop-wrapper .itemList a:hover {
+	opacity: 0.7;
+}
+
+#shop-wrapper .itemList td {
+	border: solid 1px #CCCCCC;	
+	text-align: center;
+	height: 40px;
+	font-size: 14px;
+}
+
+/* ================================================== garerry-wrapper ================================================ */
+.garrery-wrapper{
+    background-image: url("../images/motherWork.jpg");
+    background-size: cover;
+}
+
+.void_garrery {
+    padding: 350px 0;
+}
+
+/* ================================================== access-wrapper ================================================= */
+#access-wrapper {
+    background-color: #FFFFFF;
+    text-align: center;
+    color: #5f5d60;
+}
+
+iframe {
+	margin-top: 50px;
+	/* 要素に対する縦方向の位置揃えを変更し、Map下部の余白を消す */
+	vertical-align: bottom;
+}
+
+/* ====================================================== footer ===================================================== */
+footer {
+    background-color: rgba(81, 124, 28, 0.9);
+    padding-top: 25px;
+    height: 160px;    
+}
+
+.sns {
+    text-align: center;
+    padding-bottom: 5px;
+    margin-top: 70px;
+    font-size: 22px;
+}
+
+.icon {
+    background-color: rgba(34, 49, 52, 0);
+    color: #FFFFFF;
+}
+
+.void_sns {
+    margin-right: 20px;
+}
+
+#copyright {
+    font-size  : 14px;
+    text-align: center;
+    color: #FFFFFF;
+    margin-bottom: -30px;
+}
+
+/* ====================================================== contact ==================================================== */
+.contact-wrapper {
+    padding-bottom: 100px;
+    background-color: #f7f7f7;
+}
+
+.top-wrapper_contact {
+    padding: 180px 0 100px 0;
+    background-image: url("../images/shimanami.jpg");
+    background-position: center bottom -28px; 
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+.top-wrapper_contact h2 {
+    font-size: 35px;
+    font-weight: normal;
+}
+
+/* プライバシーポリシーボタン */
+.btn_privacy a {
+    /* 注意！ aはインライン要素 */
+    font-size: 16px;
+    /* リンクの下線を消す */
+    text-decoration: none;
+    color: #FFFFFF;
+    background-color: #EB8DCB;
+    padding: 12px 20px;
+    border-radius: 30px;
+    /* インライン要素の特徴を持ちながらブロックレベル要素のように扱い可能になる(p244) */
+    display: inline-block;
+}
+
+.mgr-10 {
+    margin-right: 10px;
+    /* spanタグで右側に空白を作る */
+}
+
+.btn_privacy a:hover {
+    /* マウスが重なったら変色 */
+    background-color:  dodgerblue;
+    color: floralwhite;
+}
+
+.btn_privacy a {
+    /* 変色アニメーションの速度設定 */
+    transition: all 0.5s;
+}
+
+/* 必須マーク */
+.required{
+    background: #da7489;
+    color: white;
+    font-size: 16px;
+    padding: 3.5px 11px;
+    border-radius: 12px;
+    display: inline-block;
+    margin-left: 8px;
+    line-height: 1;
+}
+
+.radio {
+    margin-right: 3px;
+    margin-bottom: 40px;
+}
+
+.void_radio {
+    margin-right: 15px;
+}
+
+.form {
+    color: #5f5d60;
+}
+
+.form p:nth-child(1) {
+    margin-bottom: 20px;
+}
+
+.form p {
+    margin-bottom: 8px;
+}
+ 
+.txt{
+    display: inline-block;
+    width: 600px;
+    padding: 0.5em;
+    border: 1px solid #CCCCCC;
+    background-color: #f7f7f7;
+    margin-bottom: 40px;
+}
+
+.txtarea {
+    display: inline-block;
+    width: 600px;
+    padding: 0.5em;
+    border: 1px solid #CCCCCC;
+    background-color: #f7f7f7;
+    margin-bottom: 30px;
+}
+
+/* 送信ボタン */
+.btnSubmit {
+    margin-top: 30px;
+    background-color: rgba(81, 124, 28, 0.9);
+    box-shadow: 0px 7px #2F4710;
+    /* 左右方向と上下方向に影を付ける */
+    opacity: 0.8;
+    width: 200px;
+    height: 50px;
+    color: #FFFFFF;
+    border: solid 0;
+    border-radius: 4px;
+    /* マウス重なると指に変換 */
+    cursor: pointer;
+}
+
+.btnSubmit:hover {
+    opacity: 1;
+}
+
+.btnSubmit:active {
+    /* 影を消す設定 */
+    box-shadow: none;
+    /* 基準位置設定ではない。要素の位置を動かす設定。topやleftと併用で有効になる */
+    position: relative;
+    top: 7px;
+}
+/* =================================================== login-wrapper ================================================= */
+#login-wrapper {
+    padding-bottom: 100px;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #5f5d60;
+}
+
+#login-wrapper .password,
+#login-wrapper .text {
+	display: inline-block;
+    width: 100%;
+    max-width: 600px;
+    padding: 0.5em;
+    border: 1px solid #CCCCCC;
+    margin-bottom: 40px;
+} 
+
+#login-wrapper form {
+	margin-top: 40px;
+	margin-bottom: 60px;
+}
+
+#login-wrapper a {
+	font-size: 14px;
+}
+
+/* ================================================== cart-wrapper =================================================== */
+#cart-wrapper {
+	padding-bottom: 100px;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #5f5d60;
+}
+
+#cart-wrapper .cartArea {
+	display: flex;	
+}
+
+#cart-wrapper .cartArea-left {
+	flex: auto;
+	width: 30%;
+	max-height: 296px;
+	order: 1;
+	/* 子要素の並び順指定 */
+	border: solid 1px #CCCCCC;
+	padding: 10px 10px 35px 40px;
+	text-align: left;
+	margin-right: 40px;
+}
+
+#cart-wrapper .cartArea-left .totalPrice {
+	font-size: 26px;
+}
+
+#cart-wrapper .cartArea-left .tax {
+	font-size: 13px;
+}
+
+#cart-wrapper .cartArea-left .register {
+	width: 185px;
+	margin-top: 10px;
+	margin-right: 10px;
+	margin-bottom: 15px;
+	font-size: 15px;
+} 
+
+#cart-wrapper .cartArea-left .continue {
+	width: 185px;
+	font-size: 15px;
+}
+
+#cart-wrapper .cartArea-right {
+	flex: auto;
+	width: 70%;
+	order: 2;
+	/* 子要素の並び順指定 */
+}
+
+#cart-wrapper .cartArea-right table {
+	width: 100%;
+	border-collapse: collapse;
+	border-top: solid 1px #CCCCCC;
+}
+
+#cart-wrapper .cartArea-right td {
+	border-bottom: solid 1px #CCCCCC;
+	padding: 10px;
+	word-wrap: break-word;
+}
+
+#cart-wrapper .cartArea-right td:nth-child(3) {
+	white-space  : nowrap;
+}
+
+.cartArea-right a {
+	color: #0066cc;
+}
+
+/* ================================================ purchase-wrapper ================================================= */
+#purchase-wrapper {
+	padding-bottom: 100px;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #5f5d60;
+}
+
+#purchase-wrapper .purchaseArea {
+	display: flex;
+}
+
+#purchase-wrapper .purchase-left {
+	flex: auto;
+	width: 40%;
+	height: 400px;
+	order: 1;
+	/* 子要素の並び順指定 */
+	border: solid 1px #CCCCCC;
+	padding: 10px 15px 35px;
+	text-align: left;
+	margin-right: 40px;
+}
+
+#purchase-wrapper .purchase-left .totalPrice {
+	font-size: 26px;
+}
+
+#purchase-wrapper .purchase-left .tax {
+	font-size: 13px;
+}
+
+#purchase-wrapper .purchase-left .cardbrand {
+	font-size: 21px;
+}
+
+#purchase-wrapper .purchase-left form {
+	margin: 40px 0 0;
+}
+
+#purchase-wrapper .purchase-left .text {
+	height: 40px;
+	width: 100%;
+	border: solid 1px #CCCCCC;
+}
+
+#purchase-wrapper .purchase-left .address {
+	margin-bottom: 40px;
+}
+
+#purchase-wrapper .purchase-left .c️onfirm {
+	margin: 0 auto;
+}
+
+#purchase-wrapper .purchase-right {
+	flex: auto;
+	width: 60%;
+	order: 2;
+	/* 子要素の並び順指定 */
+}
+
+#purchase-wrapper .purchase-right table {
+	width: 100%;
+	border-collapse: collapse;
+	border-top: solid 1px #CCCCCC;
+}
+
+#purchase-wrapper .purchase-right td {
+	border-bottom: solid 1px #CCCCCC;
+	padding: 10px;
+}
+
+#purchase-wrapper .purchase-right td:nth-child(3) {
+	white-space  : nowrap;
+}
+
+.purchase-right a {
+	color: #0066cc;
+}
+
+/* ============================================ register-wrapper =============================================== */
+#register-wrapper {
+	padding-bottom: 100px;
+    text-align: center;
+    background-color: #FFFFFF;
+    color: #5f5d60;
+}
+
+#register-wrapper .registerForm {
+	padding: 0 10%;
+}
+
+#register-wrapper .registerForm p {
+	font-size: 14px;
+	line-height: 1.6;
+	margin: 0;
+	text-align: left;
+}
+
+#register-wrapper .registerForm span {
+	color: #FF0000;
+	font-size: 14px;
+}
+
+#register-wrapper .registerForm table {
+	border: solid 1px #CCCCCC;
+	border-collapse: collapse;
+	width: 100%;
+	margin-top: 35px;
+	margin-bottom: 50px;
+}
+
+#register-wrapper .registerForm table tr th {
+	font-size: 14px;
+	text-align: center;
+	border: solid 1px #CCCCCC;
+	background-color: #f0f0f1;
+	font-weight: normal;
+}
+
+#register-wrapper .registerForm table tr td {
+	width: 80%;
+	height: 70px;
+	border: solid 1px #CCCCCC;
+	padding: 3%;
+}
+
+#register-wrapper .textbox {
+	width: 90%;
+	height: 35px;
+	border: solid 1px #CCCCCC;
+	border-radius: 4px;
+	color: #5f5d60;
+}
+
+.register {
+	width: 192px;
+}
+
+/* ================================================= mente (準備中) =================================================== */
+.mente-wrapper {
+    background-image: url("../images/windows7.jpg");
+    background-size: cover;
+    text-align: center;
+    padding: 100px 0 450px 0;
+}
+
+.mente-wrapper h2 {
+    font-size: 28px;
+	color: white;
+}
+
+/* ================================================== sticky(紙芝居風) =================================================*/
+section.fixed{
+	position: -webkit-sticky;/*Safari*/
+	position: sticky;
+	top: 70px;/*Header高さ分で止まるようにする
+	/*padding: 600px 0;/*デモ画面の高さを持たすための上下余白*/
+    padding-top: 0;
+}
+
+/* ----------タブレット以下の見え方 ------------ */
+@media screen and (max-width:768px){
+	section.fixed{
+	position:relative!important;/*sticky解除*/
+	top:0;/*70px⇒0pxに戻す*/
+}
+	section.fixed:first-of-type{
+	padding-top:100px;
+	/*最初の要素は上部にHeaderの高さ以上の余白をとる*/
+	}
+}
