@@ -1,7 +1,7 @@
 package bean;
 
+// 商品番号(id),商品名(name),価格(price)を属性に持つProduct型インスタンスを属性に持つItemクラス。
 public class Item implements java.io.Serializable{
-	// 商品番号(id),商品名(name),価格(price)をプロパティに持つProductオブジェクトをプロパティに持つ
 	private Product product;
 	private int count;   // 商品の個数
 	
