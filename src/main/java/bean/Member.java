@@ -1,5 +1,6 @@
 package bean;
 
+// 会員インスタンス。（ 顧客情報 ）
 public class Member implements java.io.Serializable {
 	private int member_id;
 	private String login;
