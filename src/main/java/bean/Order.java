@@ -1,5 +1,6 @@
 package bean;
 
+// 注文インスタンス。（ 注文情報 ）
 public class Order implements java.io.Serializable {
 	private int proceeds_id;
 	private String date;
