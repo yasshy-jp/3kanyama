@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Member;
-import dao.MemberDAO;
+import dao.MemberRegisterDAO;
 import tool.Action;
 /***** 新規会員登録機能 *****/
 public class RegisterAction extends Action {
@@ -66,7 +66,7 @@ public class RegisterAction extends Action {
 			return "r️egister-emptyerror.jsp";
 		}
 		
-		MemberDAO daoMem = new MemberDAO();
+		MemberRegisterDAO daoMem = new MemberRegisterDAO();
 		int line = daoMem.r️egister(member);
 		
 		if (line == 1) {
