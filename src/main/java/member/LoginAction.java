@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Member;
-import dao.MemberDAO;
+import dao.MemberSearchDAO;
 import tool.Action;
 
 public class LoginAction extends Action {
@@ -19,7 +19,7 @@ public class LoginAction extends Action {
 			String login=request.getParameter("login");
 			String password=request.getParameter("password");
 
-			MemberDAO daoMem=new MemberDAO();
+			MemberSearchDAO daoMem=new MemberSearchDAO();
 			Member member=daoMem.search(login, password);
 			
 			if (member!=null) {
