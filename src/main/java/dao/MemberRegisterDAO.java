@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import bean.Member;
 
 public class MemberRegisterDAO extends DAO {
-	/******* 新規会員登録機能 *******/
+	/****** 新規会員登録機能 ******/
 	public int r️egister(Member member) throws Exception {
 		int line=0;
 		try {
