@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Item;
 import bean.Member;
-import dao.MemberDAO;
+import dao.MemberAddRegisterDAO;
 import dao.ProceedsDAO;
 import dao.PurchaseDAO;
 import jp.pay.Payjp;
@@ -42,15 +42,15 @@ public class PurchaseAction extends Action {
 		String property = null; // 与信枠の確保用パラメータ
 		String value = null; // 与信枠の確保用パラメータ
 		
-		/*--- 登録状況に応じた与信枠の確保に必要なパラメータ値の設定 ---*/
-		// PAY.JP顧客登録者
+		/*--- PAY.JP 顧客登録状況に応じた与信枠の確保に必要なパラメータ設定 ---*/
+		// PAY.JP 顧客登録済み者の設定
 		if (!(member.getCustomer_id().equals("N/A"))) { 
 			property = "customer";
 			value = member.getCustomer_id();
-		// PAY.JP「新規」顧客登録希望者
+		// PAY.JP「新規」顧客登録者の設定
 		} else if (registerCard != null) {
-			// ↑チェックボックスがチェックされ且つvalue属性に値の指定なければパラメータ値は"on"となる。
-			// ↓顧客作成の処理。マップ形式で顧客オブジェクトの各種プロパティ値を設定。詳細はPAY.JP API参照。
+			// ↑ value属性に値がないチェックボックスにチェックした時のリクエストパラメータ値は"on"
+			// ↓ 顧客の作成。マップ形式で顧客オブジェクトの各種プロパティ値を設定。詳細はPAY.JP API参照。
 			// https://pay.jp/docs/api/?java#%E9%A1%A7%E5%AE%A2%E3%82%92%E4%BD%9C%E6%88%90
 			Map<String, Object> customerParams = new HashMap<String, Object>();
 			customerParams.put("card", payjpToken); // 顧客にトークンを紐付けることで支払い時のカード情報入力を排除
@@ -62,14 +62,14 @@ public class PurchaseAction extends Action {
 			}
 			property = "customer";
 			value = customer.getId();
-		// PAY.JP顧客登録なし
+		// PAY.JP 顧客登録しないで購入する場合の設定
 		} else {
 			property = "card";
 			value = payjpToken; // 1回限り有効のトークン払い
 		}
 		
 		/*** (1) 与信枠の確保 ***/
-		// ↓マップ形式で支払いオブジェクトの各種プロパティ値を設定。詳細はPAY.JP API参照。
+		// ↓ マップ形式で支払いオブジェクトの各種プロパティ値を設定。詳細はPAY.JP API参照。
 		// https://pay.jp/docs/api/?java#%E6%94%AF%E6%89%95%E3%81%84%E3%82%92%E4%BD%9C%E6%88%90
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
 		chargeParams.put(property, value); // 前項で取得したパラメータ値の設定
@@ -87,7 +87,7 @@ public class PurchaseAction extends Action {
 		// PAY.JP「新規」顧客登録者は、みかん山白岩の会員DBへ登録情報を追加（顧客ID＆カードID）
 		if (registerCard != null) {
 			card = charge.getCard();
-  			MemberDAO daoMem = new MemberDAO();
+  			MemberAddRegisterDAO daoMem = new MemberAddRegisterDAO();
 			int line = daoMem.r️egister(customer, card, member);
 			if (line != 1) {
 				return "/member/r️egister-iderror.jsp";
