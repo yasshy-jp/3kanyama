@@ -24,8 +24,6 @@ public class MemberSearchDAO extends DAO {
 		while (rs.next()) {
 			member = new Member();
 			member.setId(rs.getInt("MEMBER_ID"));
-			member.setLogin(rs.getString("LOGIN"));
-			member.setPassword(rs.getString("PASSWORD"));
 			member.setCustomer_id(rs.getString("CUSTOMER_ID"));
 			member.setCard_id(rs.getString("CARD_ID"));
 			member.setSimei(rs.getString("SIMEI"));

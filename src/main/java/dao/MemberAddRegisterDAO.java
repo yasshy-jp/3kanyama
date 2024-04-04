@@ -27,7 +27,6 @@ public class MemberAddRegisterDAO extends DAO {
 			ResultSet rs=st.executeQuery();
 			while (rs.next()) {
 				line++;
-				member.setCustomer_id(rs.getString("CUSTOMER_ID"));
 			}
 
 			if (line == 1) {
