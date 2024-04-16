@@ -12,7 +12,7 @@ import jp.pay.Payjp;
 import jp.pay.model.Card;
 import jp.pay.model.Customer;
 import tool.Action;
-
+// PAY.JPの決済情報登録状況に応じた確認画面のレスポンス
 public class PreviewAction extends Action {
 	@SuppressWarnings("unchecked")
 	public String execute(
@@ -30,9 +30,9 @@ public class PreviewAction extends Action {
 		if (cart == null || cart.size() == 0) {
 			return "preview-error-cart.jsp";
 		}
-		// 決裁情報登録状況の確認
+		// 顧客ID所有者は決裁情報登録者
 		String cusId = member.getCustomer_id();
-		// 等しくない時（PAY.JP顧客登録者）にtrue
+		// 決済情報登録者向け画面 (等しくない時にtrue）
 		if (!(cusId.equals("N/A"))) {
 			Payjp.apiKey = "sk_test_5377902ef3aa9ca1ce2e73b7";
 			Customer customer = Customer.retrieve(cusId);  //PAY.JPの顧客インスタンス
@@ -43,7 +43,7 @@ public class PreviewAction extends Action {
 			session.setAttribute("BRAND", brand);
 			return "purchase-in_member.jsp";
 		}
-
+		// 決済情報未登録者向け画面
 		return "purchase-in.jsp";
 	}
 }

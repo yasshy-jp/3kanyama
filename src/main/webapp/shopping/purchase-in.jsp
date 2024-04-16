@@ -19,15 +19,14 @@
 						<hr>
 						<form action="Purchase.action?price=${TOTALPRICE_TAXIN}" method="post">
 						<%-- scriptタグ1行で、決済フォーム,カード情報のバリデーション,トークン化を行うフォームを生成するCheckoutライブラリ。
-						タグを埋め込んだ位置に青いボタンが生成され、同時に <input type="hidden" name="payjp-token"> というコードも生成され、
-						ここにカード情報入力及びPAY.JPサーバーへ送信後に生成され返されたトークンがセットされる --%>
+						タグを埋め込んだ位置に、フォーム用の青いボタンと同時に <input type="hidden" name="payjp-token"> というコードが生成される。
+						入力されたカード情報は直接PAY.JPサーバーへ送信される。その後、一意のトークンが返され、前記のinputタグ内へセットされる。--%>
 							<script
 								type="text/javascript"
-								src="https://checkout.pay.jp/"
-								<%-- ライブラリのホスト先。scriptタグで読み込む。--%>
+								src="https://checkout.pay.jp/" <%-- チェックアウトライブラリのホスト先。scriptタグで読み込む。--%>
 								class="payjp-button"
-								data-key="pk_test_6a2dbf44aa8cc3b35598174c"
-								data-submit-text="確定（トークンを作成）"
+								data-key="pk_test_6a2dbf44aa8cc3b35598174c" <%-- 公開鍵 --%>
+								data-submit-text="確定（トークンを作成）" <%-- カード情報入力フォーム内の送信ボタンのテキスト --%>
 								data-partial="true">
 							</script>
 							<hr>
