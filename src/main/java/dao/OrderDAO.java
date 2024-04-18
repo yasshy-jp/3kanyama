@@ -17,13 +17,12 @@ public class OrderDAO extends DAO {
 
 		PreparedStatement st;
 		st=con.prepareStatement(
-			"SELECT C.PROCEEDS_ID, C.DATE, M.SIMEI, C.CHARGE_ID, C.TOTALPRICE, P.NAME, P.PRICE, O.COUNT FROM PROCEEDS AS C JOIN PURCHASE AS O ON C.CHARGE_ID = O.CHARGE_ID JOIN FARMPRODUCT AS P ON O.PRODUCT_ID = P.PRODUCT_ID JOIN MEMBER AS M ON C.MEMBER_ID = M.MEMBER_ID;"
+			"SELECT C.DATE, M.SIMEI, C.CHARGE_ID, C.TOTALPRICE, P.NAME, P.PRICE, O.COUNT FROM PROCEEDS AS C JOIN PURCHASE AS O ON C.CHARGE_ID = O.CHARGE_ID JOIN FARMPRODUCT AS P ON O.PRODUCT_ID = P.PRODUCT_ID JOIN MEMBER AS M ON C.MEMBER_ID = M.MEMBER_ID;"
 			);
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
 			Order order=new Order();
-			order.setId(rs.getInt("PROCEEDS_ID"));
 			order.setDate(rs.getString("DATE"));
 			order.setSimei(rs.getString("SIMEI"));
 			order.setCharge_id(rs.getString("CHARGE_ID"));
