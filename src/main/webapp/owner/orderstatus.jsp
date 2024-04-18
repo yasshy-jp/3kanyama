@@ -22,7 +22,7 @@
 									<td>${order.name}</td>
 									<td>${order.price}</td>
 									<td>${order.count}</td>
-									<td><a href = "CartRemove.action">削除</a></td>
+									<td><a href = "">削除</a></td> <%-- リンク先実装予定：Remove.action --%>
 								</tr>
 							</table>
 						</c:forEach>
