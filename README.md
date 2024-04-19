@@ -10,10 +10,6 @@
 ![ER図（DB概念・論理設計）](https://github.com/yasshy-jp/3kanyama/blob/master/diagrams/ER%E5%9B%B3%EF%BC%88DB%E8%A8%AD%E8%A8%88%EF%BC%89.drawio.png)
 <br>
 <br>
-## ■ER図（DB概念・論理設計）
-[![](./ER図（DB設計）.drawio.png)](https://app.diagrams.net/?libs=general;er#G10GyUYAo3ASDC7hs4xhfBzeYb2zHZpt6K#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D)
-<br>
-<br>
 ### ■画面遷移図（ログイン）
 ![画面遷移図（ログイン）](https://github.com/yasshy-jp/3kanyama/blob/master/diagrams/%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3%EF%BC%88%E3%83%AD%E3%82%B0%E3%82%A4%E3%83%B3%EF%BC%89.drawio.png)
 <br>
