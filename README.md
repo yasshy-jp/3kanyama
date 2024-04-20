@@ -7,7 +7,7 @@
 <br>
 <br>
 ### ■ER図（DB概念・論理設計）
-![](シーケンス図(決済処理)](https://app.diagrams.net/#Hyasshy-jp%2F3kanyama%2Fmaster%2Fdiagrams%2FER%E5%9B%B3%EF%BC%88DB%E8%A8%AD%E8%A8%88).drawio.png#%7B%22pageId%22%3A%22R2lEEEUBdFMjLlhIrx00%22%7D)
+![基本アーキテクチャ図(ログイン)](https://github.com/yasshy-jp/3kanyama/blob/master/diagrams/ER%E5%9B%B3%E3%81%BF%E3%81%8B%E3%82%93%E5%B1%B1.drawio.png)
 <br>
 <br>
 ### ■画面遷移図（会員ログイン）
