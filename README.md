@@ -7,7 +7,7 @@
 <br>
 <br>
 ### ■ER図（DB概念・論理設計）
-![](https://github.com/yasshy-jp/3kanyama/blob/master/diagrams/ER%E5%9B%B3%EF%BC%88DB%E8%A8%AD%E8%A8%88%EF%BC%89.drawio.png)
+![](https://github.com/yasshy-jp/3kanyama/blob/master/diagrams/ER%E5%9B%B3%EF%BC%88DB%E8%A8%AD%E8%A8%88).drawio.png)
 <br>
 <br>
 ### ■ER図2（DB概念・論理設計）
