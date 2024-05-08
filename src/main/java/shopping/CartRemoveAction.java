@@ -23,6 +23,7 @@ public class CartRemoveAction extends Action {
 		int totalCount = (int)session.getAttribute("TOTALCOUNT"); // 現在の合計個数取得
 		int totalPrice_taxIn = (int)session.getAttribute("TOTALPRICE_TAXIN"); // 現在の税込合計金額取得
 		List<Item> cart = (List<Item>)session.getAttribute("CART"); // 商品カート取得
+		
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
 				// カート内の合計個数と金額を再計算				 
