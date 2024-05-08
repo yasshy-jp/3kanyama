@@ -5,7 +5,6 @@
             <div class="container">
                 <div class="heading">
                 	<h2>会員登録フォーム</h2>
-                	<p class="translation_notes"><i class="fas fa-lock"></i>ベータ版のため試験運用中</p>
 				</div>	
 				<div class="registerForm">
 					<p>
