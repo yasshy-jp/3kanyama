@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Product;
-import dao.ProductDAO;
+import dao.ProductSearchDAO;
 import tool.Action;
 // オンラインショップ商品一覧ページの生成
 public class ProductAction extends Action {
@@ -28,7 +28,7 @@ public class ProductAction extends Action {
 		// キーワードと品目ともにデフォルト値の場合に全商品を表示さすための設定
 		if (keyword == null && category == 0) keyword = "";
 		
-		ProductDAO dao = new ProductDAO();
+		ProductSearchDAO dao = new ProductSearchDAO();
 		List<Product> list=dao.search(keyword, category);
 
 		// 検索結果の保持で買い物カゴなどページ遷移後に買い物の続きを可能にする

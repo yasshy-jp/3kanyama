@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Product;
-
-public class ProductDAO extends DAO {
-	// 商品検索機能
+//商品検索機能
+public class ProductSearchDAO extends DAO {
+	
 	public List<Product> search(String keyword, int category) throws Exception {
 		List<Product> list=new ArrayList<>();
 
@@ -35,19 +35,4 @@ public class ProductDAO extends DAO {
 		return list;
 	}
 
-	// 商品追加機能
-	public int insert(Product product) throws Exception {
-		Connection con=getConnection();
-
-		PreparedStatement st=con.prepareStatement(
-			"INSERT INTO FARMPRODUCT (CATEGORY_ID, NAME, PRICE) VALUES(?, ?, ?)");
-		st.setInt(1, product.getId());
-		st.setString(2, product.getName());
-		st.setInt(3, product.getPrice());
-		int line=st.executeUpdate();// DBの内容を変更するメソッド。変更された行数を返す。(p210)
-
-		st.close();
-		con.close();
-		return line;
-	}
 }
