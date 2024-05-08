@@ -12,8 +12,8 @@ public class DAO {
 	public Connection getConnection() throws Exception {
 		if (ds==null) {
 			InitialContext ic=new InitialContext();
-			// データソース名（jdbc/mikanyama）を設定（p197 xml設定ファイルより）
-			ds=(DataSource)ic.lookup("java:/comp/env/jdbc/mikanyama");
+			// データソース名（jdbc/mikan）を設定（p197 xml設定ファイルより）
+			ds=(DataSource)ic.lookup("java:/comp/env/jdbc/mikan");
 		}
 		return ds.getConnection();
 	}
