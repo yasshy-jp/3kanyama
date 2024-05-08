@@ -17,12 +17,12 @@ Serversのserver.xmlでも同様の設定ができるが、こっちの方が優
 	↓データソース（アプリケーションサーバを利用してDBに接続する仕組み）の設定。
 	コネクションプールも使用可能になる。( SBCreative p182,196-198 ) -->
 	<Resource
-		name="jdbc/mikanyama"
+		name="jdbc/mikan"
 		auth="Container"
 		type="javax.sql.DataSource"
-		driverClassName="org.h2.Driver"
-		url="jdbc:h2:tcp://localhost/~/DB/docoTsubu"
-		username="yasushi"
-		password="8afdetH2d"
+		driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://localhost/MikanYama"
+		username="root"
+		password="8afdetSql"
 	/>
 </Context>
