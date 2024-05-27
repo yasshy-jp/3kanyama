@@ -35,7 +35,7 @@ public class PurchaseAction extends Action {
 		Member member = (Member)session.getAttribute("MEMBER");  // 会員オブジェクト
 		
 		/************* PAY.JPのAPIで支払い処理 *************/
-		Payjp.apiKey = "sk_test_5377902ef3aa9ca1ce2e73b7";
+		Payjp.apiKey = "********************************";
 		Customer customer = null;
 		Charge charge = null;
 		Card card = null;
