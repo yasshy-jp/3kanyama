@@ -15,8 +15,6 @@ public class CartRemoveAction extends Action {
 		HttpServletRequest request, HttpServletResponse response
 	) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
-
 		HttpSession session = request.getSession();
 		int id = Integer.parseInt(request.getParameter("id"));  // 削除商品のID取得
 		int totalPrice = (int)session.getAttribute("TOTALPRICE"); // 現在の合計金額取得

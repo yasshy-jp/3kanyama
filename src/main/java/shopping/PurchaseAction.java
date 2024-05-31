@@ -25,7 +25,6 @@ public class PurchaseAction extends Action {
 		HttpServletRequest request, HttpServletResponse response
 	) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		
 		String price = request.getParameter("price");  // 税込み合計金額
