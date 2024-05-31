@@ -16,7 +16,6 @@ public class RegisterAction extends Action {
 			HttpServletRequest request, HttpServletResponse response
 		) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 			
 		String login = request.getParameter("login"); // ログインID

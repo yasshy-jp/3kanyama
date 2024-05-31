@@ -18,8 +18,6 @@ public class CartAddAction extends Action {
 			HttpServletRequest request, HttpServletResponse response
 		) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
-
 		HttpSession session = request.getSession();
 		int id = Integer.parseInt(request.getParameter("id")); // 商品ID
 		int count = Integer.parseInt(request.getParameter("count")); // 商品個数

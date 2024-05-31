@@ -15,11 +15,10 @@ public class ProductAction extends Action {
 			HttpServletRequest request, HttpServletResponse response
 		) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
+		String keyword = request.getParameter("keyword");		
 		int category = 0;
-		
-		String keyword = request.getParameter("keyword");
+
 		// 品目検索のリクエスト（"category" = 1〜4）が来た際は、プリミティブ型に変換
 		if (request.getParameter("category") != null) {
 			category = Integer.parseInt(request.getParameter("category"));

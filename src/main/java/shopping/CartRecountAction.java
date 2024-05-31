@@ -16,8 +16,6 @@ public class CartRecountAction extends Action {
 			HttpServletRequest request, HttpServletResponse response
 		) throws Exception {
 		
-		request.setCharacterEncoding("UTF-8");
-
 		HttpSession session = request.getSession();
 		// 数量変更する商品のIDを取得
 		int id = Integer.parseInt(request.getParameter("id"));
