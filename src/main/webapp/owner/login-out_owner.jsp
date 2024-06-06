@@ -10,6 +10,9 @@
          		</c:if>
          		<br>
          		<a href = "OrderStatus.action">受注状況へ</a>
+         		<br>
+         		<br>
+         		<a href = "StockStatus.action">在庫状況へ</a>
           	</div>
         </div>
     </div>

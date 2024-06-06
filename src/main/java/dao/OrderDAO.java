@@ -31,7 +31,6 @@ public class OrderDAO extends DAO {
 			order.setPrice(rs.getInt("PRICE"));
 			order.setCount(rs.getInt("COUNT"));
 			orderlist.add(order);
-			System.out.println(order.getId() + " : " + order.getDate());
 		}
 
 		st.close();

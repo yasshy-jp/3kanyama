@@ -1,9 +1,9 @@
 package bean;
 
-//商品インスタンス。（ 商品情報 ）
-public class Product implements java.io.Serializable{
+//在庫インスタンス。（ 商品在庫 ）
+public class Stock implements java.io.Serializable{
 	private int id;  //商品ID
-	private int kategoryId;  //品目ID
+	private String kategoryName;  //品目
 	private String name;  //商品名
 	private int price;  //単価
 	private int stock;  //在庫
@@ -11,8 +11,8 @@ public class Product implements java.io.Serializable{
 	public int getId() {
 		return id;
 	}
-	public int getKategoryId() {
-		return kategoryId;
+	public String getKategoryName() {
+		return kategoryName;
 	}
 	public String getName() {
 		return name;
@@ -27,8 +27,8 @@ public class Product implements java.io.Serializable{
 	public void setId(int id) {
 		this.id=id;
 	}
-	public void setKategoryId(int kategoryId) {
-		this.kategoryId=kategoryId;
+	public void setKategoryName(String kategoryName) {
+		this.kategoryName=kategoryName;
 	}
 	public void setName(String name) {
 		this.name=name;
