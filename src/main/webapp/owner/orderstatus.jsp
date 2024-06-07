@@ -7,6 +7,7 @@
 				<div class="heading">
 					<h2>Order Status</h2>
 					<p class="translation">受注状況</p>
+					<a href = "login-out_owner.jsp">オーナーHomeへ</a>
 				</div>
 				<div class="cartArea">
 					<div class="cartArea-right">
@@ -30,7 +31,6 @@
 				</div>
 				<br>
 				<br>
-				<a href = "login-out_owner.jsp">オーナーHomeへ</a>
 				<hr>
 			</div>
 		</div>
