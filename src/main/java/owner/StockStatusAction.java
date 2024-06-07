@@ -23,8 +23,8 @@ public class StockStatusAction extends Action {
 			return "owner-error-login.jsp";
 		}
 
-		StockDAO daoSt = new StockDAO();
-		List<Stock> stocklist = daoSt.stockStatus();
+		StockDAO stdao = new StockDAO();
+		List<Stock> stocklist = stdao.stockStatus();
 
 		session.setAttribute("STOCKLIST", stocklist);
 		return "stockstatus.jsp";

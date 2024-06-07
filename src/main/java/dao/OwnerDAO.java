@@ -24,8 +24,6 @@ public class OwnerDAO extends DAO {
 		while (rs.next()) {
 			owner = new Owner();
 			owner.setId(rs.getInt("OWNER_ID"));
-			owner.setLogin(rs.getString("LOGIN"));
-			owner.setPassword(rs.getString("PASSWORD"));
 			owner.setName(rs.getString("NAME"));
 		}
 

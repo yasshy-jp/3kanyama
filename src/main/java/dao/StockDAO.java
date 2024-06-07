@@ -11,12 +11,14 @@ import bean.Stock;
 public class StockDAO extends DAO {
 	/******* 在庫リスト（商品リスト） *******/
 	public List<Stock> stockStatus() throws Exception {
+		// 在庫リストをコレクション（List）で用意
 		List<Stock> stocklist=new ArrayList<>();
 
 		Connection con=getConnection();
 
 		PreparedStatement st;
 		st=con.prepareStatement(
+			// 人間が理解し易いよう、商品DBと品目DBを結合。品目ID列を品目名とした在庫リストを得る。
 			"select P.product_id, H.category_name, P.name, P.price, P.stock from farmproduct as P join category as H on P.category_id = H.category_id"
 			);
 		ResultSet rs=st.executeQuery();
@@ -29,7 +31,6 @@ public class StockDAO extends DAO {
 			stock.setPrice(rs.getInt("price"));
 			stock.setStock(rs.getInt("stock"));
 			stocklist.add(stock);
-			System.out.println(stock.getId() + " : " + stock.getKategoryName() + " : " + stock.getName());
 		}
 
 		st.close();
