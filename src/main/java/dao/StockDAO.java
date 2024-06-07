@@ -7,9 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import bean.Stock;
-
+/******* 在庫リスト（商品リスト） *******/
 public class StockDAO extends DAO {
-	/******* 在庫リスト（商品リスト） *******/
+
 	public List<Stock> stockStatus() throws Exception {
 		// 在庫リストをコレクション（List）で用意
 		List<Stock> stocklist=new ArrayList<>();
