@@ -5,25 +5,28 @@
 		<div id="cart-wrapper">
 			<div class="container">
 				<div class="heading">
-					<h2>Order Status</h2>
-					<p class="translation">受注状況</p>
+					<h2>Stock Status</h2>
+					<p class="translation">在庫状況</p>
 					<a href = "login-out_owner.jsp">オーナーHomeへ</a>
 				</div>
 				<div class="cartArea">
 					<div class="cartArea-right">
 						<%-- JSTLのCoreタグによる繰り返し。
 						属性に保存されたリスト等のコレクションや配列を繰り返し対象に指定 --%>
-						<c:forEach var = "order" items = "${ORDERLIST}">
-							<table>	
+						<c:forEach var = "stock" items = "${STOCKLIST}">
+							<table>
 								<tr>
-									<td>${order.date}</td>
-									<td>${order.simei}</td>
-									<td>${order.charge_id}</td>
-									<td>${order.totalprice}</td>
-									<td>${order.name}</td>
-									<td>${order.price}</td>
-									<td>${order.count}</td>
-									<td><a href = "">削除</a></td> <%-- リンク先実装予定：Remove.action --%>
+									<td>${stock.id}</td>
+									<td>${stock.kategoryName}</td>
+									<td>${stock.name}</td>
+									<td>${stock.price}</td>
+									<td>${stock.stock}</td>
+									<td>
+										<form action = "StockAdd.action?id=${stock.id}" method = "post">
+											<input type = "text" name = "stadd">
+											<input type = "submit" value = "追加">
+										</form>
+									</td>
 								</tr>
 							</table>
 						</c:forEach>

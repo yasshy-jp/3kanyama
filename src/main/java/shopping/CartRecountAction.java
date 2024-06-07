@@ -48,6 +48,6 @@ public class CartRecountAction extends Action {
 				break;
 			}
 		}
-		return "cart.jsp";	
+		return "cart.jsp";
 	}
 }
