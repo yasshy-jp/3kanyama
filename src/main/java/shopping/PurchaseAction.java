@@ -10,8 +10,11 @@ import javax.servlet.http.HttpSession;
 
 import bean.Item;
 import bean.Member;
+import bean.Product;
 import dao.MemberAddRegisterDAO;
 import dao.ProceedsDAO;
+import dao.ProductSearchDAO;
+import dao.ProductStockRegisterDAO;
 import dao.PurchaseDAO;
 import jp.pay.Payjp;
 import jp.pay.model.Card;
@@ -34,7 +37,7 @@ public class PurchaseAction extends Action {
 		Member member = (Member)session.getAttribute("MEMBER");  // 会員オブジェクト
 		
 		/************* PAY.JPのAPIで支払い処理 *************/
-		Payjp.apiKey = "********************************";
+		Payjp.apiKey = "sk_test_5377902ef3aa9ca1ce2e73b7";
 		Customer customer = null;
 		Charge charge = null;
 		Card card = null;
@@ -93,23 +96,70 @@ public class PurchaseAction extends Action {
 			}
 		}
 		
-		/*** (2) 購入明細DBへ追加 ************************************************************************************/
-		PurchaseDAO daoPur = new PurchaseDAO();
-		if (cart == null || !daoPur.insert(charge, cart)) {
-			return "purchase-insert-error.jsp";
+		/*** (2) 在庫の最終確認 **************************************************************************************/
+		// 排他制御区間
+		synchronized (this) {
+			// 最新の商品リストを取得
+			ProductSearchDAO dao = new ProductSearchDAO();
+			List<Product> list=dao.search("",0);
+			// 最新の商品リストの在庫で、カートに追加した個数を賄えるか確認
+			for (Item item : cart) {
+				// 購入商品のID取得
+				int id = item.getProduct().getId();
+				// 購入商品の個数取得
+				int count = item.getCount();
+				for (Product p : list) {
+					if (p.getId() == id) {
+						if(p.getStock() >= count){
+							break;
+						} else {
+							return "stock-error.jsp";
+						}
+					}
+				}
+			}
+		
+			/*** (3) 購入明細DBへ追加 *******************************************************************************/
+			PurchaseDAO daoPur = new PurchaseDAO();
+			if (cart == null || !daoPur.insert(charge, cart)) {
+				return "purchase-insert-error.jsp";
+			}
+			
+			/*** (4) 支払い確定 *************************************************************************************/
+			String ch_id = charge.getId(); // 課金IDを取得
+			try {
+				Charge ch = Charge.retrieve(ch_id);
+				System.out.println(ch.capture()); // 確定処理と結果（支払いオブジェクト）のコンソール出力
+	        } catch (Exception e) {
+	        	e.printStackTrace();
+	        	return "credit-confirm_error.jsp";
+	        }
+			
+			/*** (5) 在庫の減算 *************************************************************************************/
+			// 在庫登録用DAOの取得
+			ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
+			// 最新の商品リストの在庫で、カートに追加した個数を賄えるか確認
+			for (Item item : cart) {
+				// 購入商品のID取得
+				int id = item.getProduct().getId();
+				// 購入商品の個数取得
+				int count = item.getCount();
+				for (Product p : list) {
+					if (p.getId() == id){
+						int stock = p.getStock();
+						stock -= count;
+						// 商品DBの在庫情報を更新
+						int line = psrdao.r️egister(id, stock);
+						if (line != 1) {
+							return "stock-register-error.jsp";
+						}
+						break;
+				    }
+				}
+			}
 		}
 		
-		/*** (3) 支払い確定 ******************************************************************************************/
-		String ch_id = charge.getId(); // 課金IDを取得
-		try {
-			Charge ch = Charge.retrieve(ch_id);
-			System.out.println(ch.capture()); // 確定処理と結果（支払いオブジェクト）のコンソール出力
-        } catch (Exception e) {
-        	e.printStackTrace();
-        	return "credit-confirm_error.jsp";
-        }
-		
-		/*** (4) 売上DBへ追加 ****************************************************************************************/
+		/*** (6) 売上DBへ追加 ****************************************************************************************/
 		ProceedsDAO daoPro = new ProceedsDAO();
 		boolean result = daoPro.insert(charge, member, price);
 		if (!result) {

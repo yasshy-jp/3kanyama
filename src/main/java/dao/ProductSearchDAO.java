@@ -26,6 +26,7 @@ public class ProductSearchDAO extends DAO {
 			p.setId(rs.getInt("product_id"));
 			p.setName(rs.getString("name"));
 			p.setPrice(rs.getInt("price"));
+			p.setStock(rs.getInt("stock"));
 			list.add(p);
 		}
 
