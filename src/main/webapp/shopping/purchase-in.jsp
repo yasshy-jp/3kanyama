@@ -17,7 +17,7 @@
 							<span class="tax">（内消費税¥${TOTALPRICE_TAXIN - TOTALPRICE}）</span>
 						</p>
 						<hr>
-						<form action="Purchase.action?price=${TOTALPRICE_TAXIN}" method="post">
+						<form action="Purchase.action" method="post">
 						<%-- scriptタグ1行で、決済フォーム,カード情報のバリデーション,トークン化を行うフォームを生成するCheckoutライブラリ。
 						タグを埋め込んだ位置に、フォーム用の青いボタンと同時に <input type="hidden" name="payjp-token"> というコードが生成される。
 						入力されたカード情報は直接PAY.JPサーバーへ送信される。その後、一意のトークンが返され、前記のinputタグ内へセットされる。--%>
@@ -31,6 +31,7 @@
 							</script>
 							<hr>
 							<input type="checkbox" name="registerCard"> カード情報を登録
+							<input type="hidden" name="price" value="${TOTALPRICE_TAXIN}">
 							<p> ＊次回購入より入力不要でお支払いいただけます。</p>
 							<hr>
 							<input type="submit" value="支払いを確定" class="btn btnBig c️onfirm">

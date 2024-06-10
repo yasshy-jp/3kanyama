@@ -22,9 +22,9 @@
 									<td>${stock.price}</td>
 									<td>${stock.stock}</td>
 									<td>
-										<form action = "StockAdd.action?id=${stock.id}" method = "post">
+										<form action = "StockRecount.action?id=${stock.id}" method = "post">
 											<input type = "text" name = "stadd">
-											<input type = "submit" value = "追加">
+											<input type = "submit" value = "更新">
 										</form>
 									</td>
 								</tr>

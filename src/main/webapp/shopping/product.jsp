@@ -54,13 +54,14 @@
 								</tr>
 								<tr>
 									<td>商品${product.id}</td>
-									<td>${product.name}</td>
+									<td>${product.name}：${product.stock>0 ? "在庫あり" : "在庫なし"}</td>
 								</tr>
 								<tr>
 									<td>${product.price}円</td>
 									<td>
-										<form action = "CartAdd.action?id=${product.id}" method = "post">
-											<select name = "count">
+										<form action = "CartAdd.action" method = "post">
+											<input type="hidden" name="id" value="${product.id}">
+											<select name = "addQuantity">
 												<%-- 繰り返し回数の指定（SBC P341）--%>
 												<c:forEach var = "i" begin = "1" end = "20">
 													<option value = "${i}">${i}</option>

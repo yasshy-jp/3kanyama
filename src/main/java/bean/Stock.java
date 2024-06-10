@@ -1,6 +1,6 @@
 package bean;
 
-//在庫インスタンス。（ 商品在庫 ）
+//在庫インスタンス。（ オーナー向け商品在庫管理用 ）
 public class Stock implements java.io.Serializable{
 	private int id;  //商品ID
 	private String kategoryName;  //品目

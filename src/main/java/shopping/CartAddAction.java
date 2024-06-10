@@ -19,13 +19,14 @@ public class CartAddAction extends Action {
 		) throws Exception {
 		
 		HttpSession session = request.getSession();
-		int id = Integer.parseInt(request.getParameter("id")); // 商品ID
-		int count = Integer.parseInt(request.getParameter("count")); // 商品個数
+		
+		int id = Integer.parseInt(request.getParameter("id"));  // 商品ID
+		int addQuantity = Integer.parseInt(request.getParameter("addQuantity"));  // カートへ追加の個数
 		int totalPrice = 0; // 合計金額
 		int totalCount = 0; // 合計個数
 		int totalPrice_taxIn = 0; //税込み合計金額
 		String newItemAdd_indicator = "on"; // 追加商品がカート内に既に存在するかどうかの指標("on"は新たな商品)
-		
+				
 		// 商品(Bean)を格納するカート(List)をセッションスコープから取得
 		List<Item> cart = (List<Item>)session.getAttribute("CART");
 		if (cart == null) {
@@ -35,19 +36,19 @@ public class CartAddAction extends Action {
 		// カート内に追加商品と同種商品が存在する場合は個数を更新し、newItemAdd_indicatorを"off"に設定
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
-				item.setCount(item.getCount() + count);
+				item.setCount(item.getCount() + addQuantity);
 				newItemAdd_indicator = "off";
 				break;
 			}
 		}
 		// カート内に同種商品が存在していない場合は新たに商品情報を追加
 		if(newItemAdd_indicator == "on") {
-			List<Product> list = (List<Product>)session.getAttribute("LIST");
+			List<Product> list = (List<Product>)session.getAttribute("LIST");  //商品リスト
 			for (Product p : list) {
 				if (p.getId() == id) {
 					Item item = new Item();
 					item.setProduct(p);
-					item.setCount(count);
+					item.setCount(addQuantity);
 					cart.add(item);
 					break;
 			    }
