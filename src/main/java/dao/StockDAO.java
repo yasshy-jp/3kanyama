@@ -19,7 +19,8 @@ public class StockDAO extends DAO {
 		PreparedStatement st;
 		st=con.prepareStatement(
 			// 人間が理解し易いよう、商品DBと品目DBを結合。品目ID列を品目名とした在庫リストを得る。
-			"select P.product_id, H.category_name, P.name, P.price, P.stock from farmproduct as P join category as H on P.category_id = H.category_id"
+			"select P.product_id, H.category_name, P.name, P.price, P.stock "
+			+ "from farmproduct as P join category as H on P.category_id = H.category_id"
 			);
 		ResultSet rs=st.executeQuery();
 

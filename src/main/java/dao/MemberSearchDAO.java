@@ -16,17 +16,17 @@ public class MemberSearchDAO extends DAO {
 
 		PreparedStatement st;
 		st=con.prepareStatement(
-			"SELECT * FROM MEMBER WHERE LOGIN=? AND PASSWORD=?");
+			"select * from member where login=? and password=?");
 		st.setString(1, login);
 		st.setString(2, password);
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
 			member = new Member();
-			member.setId(rs.getInt("MEMBER_ID"));
-			member.setCustomer_id(rs.getString("CUSTOMER_ID"));
-			member.setCard_id(rs.getString("CARD_ID"));
-			member.setSimei(rs.getString("SIMEI"));
+			member.setId(rs.getInt("member_id"));
+			member.setCustomer_id(rs.getString("customer_id"));
+			member.setCard_id(rs.getString("card_id"));
+			member.setSimei(rs.getString("simei"));
 		}
 
 		st.close();

@@ -16,7 +16,7 @@ public class ProductSearchDAO extends DAO {
 		Connection con=getConnection();
 
 		PreparedStatement st=con.prepareStatement(
-			"SELECT * FROM FARMPRODUCT WHERE NAME LIKE ? OR CATEGORY_ID=?");
+			"select * from farmproduct where name like ? or category_id=?");
 		st.setString(1, "%"+keyword+"%");
 		st.setInt(2, category);
 		ResultSet rs=st.executeQuery(); // DBの検索結果を取得するメソッド。結果はオブジェクトで返す。(p202)

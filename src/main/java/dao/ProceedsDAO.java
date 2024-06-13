@@ -18,7 +18,7 @@ public class ProceedsDAO extends DAO {
 		String s = f.format(now);
 		
 		PreparedStatement st = con.prepareStatement(
-			"insert into proceeds (CHARGE_ID, DATE, MEMBER_ID, TOTALPRICE) values(?, ?, ?, ?)");
+			"insert into proceeds (charge_id, date, member_id, totalprice) values(?, ?, ?, ?)");
 		st.setString(1, charge.getId());
 		st.setString(2, s);
 		st.setInt(3, member.getId());

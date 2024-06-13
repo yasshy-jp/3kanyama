@@ -14,8 +14,8 @@ public class MemberRegisterDAO extends DAO {
 			Connection con=getConnection();
 			con.setAutoCommit(false);
 
-			PreparedStatement st=con.prepareStatement("INSERT INTO MEMBER (LOGIN, PASSWORD, SIMEI, FURIGANA, "
-					+ "MAIL, TEL, POSTCODE, PREFECTURE, CITY, ADDRESS) VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+			PreparedStatement st=con.prepareStatement("insert into member (login, password, simei, furigana, "
+					+ "mail, tel, postcode, prefecture, city, address) value(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			st.setString(1, member.getLogin());
 			st.setString(2, member.getPassword());
 			st.setString(3, member.getSimei());
@@ -28,7 +28,7 @@ public class MemberRegisterDAO extends DAO {
 			st.setString(10, member.getAddress());
 			st.executeUpdate();
 
-			st=con.prepareStatement("SELECT * FROM MEMBER WHERE LOGIN=?");
+			st=con.prepareStatement("select * from member where login=?");
 			st.setString(1, member.getLogin());
 			ResultSet rs=st.executeQuery();
 			while (rs.next()) {
