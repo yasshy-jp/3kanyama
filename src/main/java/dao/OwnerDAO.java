@@ -16,15 +16,15 @@ public class OwnerDAO extends DAO {
 
 		PreparedStatement st;
 		st=con.prepareStatement(
-			"SELECT * FROM OWNER WHERE LOGIN=? AND PASSWORD=?");
+			"select * from owner where login=? AND password=?");
 		st.setString(1, login);
 		st.setString(2, password);
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
 			owner = new Owner();
-			owner.setId(rs.getInt("OWNER_ID"));
-			owner.setName(rs.getString("NAME"));
+			owner.setId(rs.getInt("owner_id"));
+			owner.setName(rs.getString("name"));
 		}
 
 		st.close();

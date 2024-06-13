@@ -15,7 +15,7 @@ public class PurchaseDAO extends DAO {
 		
 		for (Item item : cart) {
 			PreparedStatement st = con.prepareStatement(
-				"INSERT INTO PURCHASE (CHARGE_ID, PRODUCT_ID, COUNT) VALUES(?, ?, ?)");
+				"insert into purchase (charge_id, product_id, count) values(?, ?, ?)");
 			st.setString(1, charge.getId());
 			Product p = item.getProduct();
 			st.setInt(2, p.getId());

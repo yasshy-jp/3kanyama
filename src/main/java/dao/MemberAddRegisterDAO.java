@@ -16,17 +16,17 @@ public class MemberAddRegisterDAO extends DAO {
 			Connection con=getConnection();
 			con.setAutoCommit(false);
 
-			PreparedStatement st=con.prepareStatement("UPDATE MEMBER SET CUSTOMER_ID=?, CARD_ID=? WHERE MEMBER_ID=?");
+			PreparedStatement st=con.prepareStatement("update member set customer_id=?, card_id=? where member_id=?");
 			st.setString(1, customer.getId());	
 			st.setString(2, card.getId());
 			st.setInt(3, member.getId());
 			st.executeUpdate();
 
-			st=con.prepareStatement("SELECT * FROM MEMBER WHERE CUSTOMER_ID=?");
+			st=con.prepareStatement("select * from member where customer_id=?");
 			st.setString(1, customer.getId());
 			ResultSet rs=st.executeQuery();
 			while (rs.next()) {
-				member.setCustomer_id(rs.getString("CUSTOMER_ID"));
+				member.setCustomer_id(rs.getString("customer_id"));
 				line++;
 			}
 

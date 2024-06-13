@@ -12,12 +12,12 @@ public class ProductStockRegisterDAO extends DAO {
 			Connection con = getConnection();
 			con.setAutoCommit(false);
 
-			PreparedStatement st = con.prepareStatement("UPDATE FARMPRODUCT SET STOCK=? WHERE PRODUCT_ID=?");
+			PreparedStatement st = con.prepareStatement("update farmproduct set stock=? where product_id=?");
 			st.setInt(1, recount);
 			st.setInt(2, id);
 			st.executeUpdate();
 
-			st = con.prepareStatement("SELECT * FROM FARMPRODUCT WHERE STOCK=? && PRODUCT_ID=?");
+			st = con.prepareStatement("select * from farmproduct where stock=? && product_id=?");
 			st.setInt(1, recount);
 			st.setInt(2, id);
 			ResultSet rs = st.executeQuery();

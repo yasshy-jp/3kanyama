@@ -17,19 +17,22 @@ public class OrderDAO extends DAO {
 
 		PreparedStatement st;
 		st=con.prepareStatement(
-			"SELECT C.DATE, M.SIMEI, C.CHARGE_ID, C.TOTALPRICE, P.NAME, P.PRICE, O.COUNT FROM PROCEEDS AS C JOIN PURCHASE AS O ON C.CHARGE_ID = O.CHARGE_ID JOIN FARMPRODUCT AS P ON O.PRODUCT_ID = P.PRODUCT_ID JOIN MEMBER AS M ON C.MEMBER_ID = M.MEMBER_ID;"
+			"select c.date, m.simei, c.charge_id, c.totalprice, p.name, p.price, o.count "
+			+ "from proceeds as c join purchase as o on c.charge_id = o.charge_id"
+			+ " join farmproduct as p on o.product_id = p.product_id "
+			+ "join member as m on c.member_id = m.member_id;"
 			);
 		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
 			Order order=new Order();
-			order.setDate(rs.getString("DATE"));
-			order.setSimei(rs.getString("SIMEI"));
-			order.setCharge_id(rs.getString("CHARGE_ID"));
-			order.setTotalprice(rs.getInt("TOTALPRICE"));
-			order.setName(rs.getString("NAME"));
-			order.setPrice(rs.getInt("PRICE"));
-			order.setCount(rs.getInt("COUNT"));
+			order.setDate(rs.getString("date"));
+			order.setSimei(rs.getString("simei"));
+			order.setCharge_id(rs.getString("charge_id"));
+			order.setTotalprice(rs.getInt("totalprice"));
+			order.setName(rs.getString("name"));
+			order.setPrice(rs.getInt("price"));
+			order.setCount(rs.getInt("count"));
 			orderlist.add(order);
 		}
 
