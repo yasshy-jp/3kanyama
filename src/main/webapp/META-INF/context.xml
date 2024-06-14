@@ -20,7 +20,7 @@ Serversのserver.xmlでも同様の設定ができるが、こっちの方が優
 		name="jdbc/mikan"
 		auth="Container"
 		type="javax.sql.DataSource"
-		driverClassName="com.mysql.jdbc.Driver"
+		driverClassName="com.mysql.cj.jdbc.Driver"
 		url="jdbc:mysql://localhost/MikanYama"
 		username="root"
 		password="8afdetSql"
