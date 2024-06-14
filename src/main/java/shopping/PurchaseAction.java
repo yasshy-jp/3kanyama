@@ -92,7 +92,7 @@ public class PurchaseAction extends Action {
   			MemberAddRegisterDAO daoMem = new MemberAddRegisterDAO();
 			int line = daoMem.r️egister(customer, card, member);
 			if (line != 1) {
-				return "/member/r️egister-iderror.jsp";
+				return "/member/iderror.jsp";
 			}
 		}
 		
