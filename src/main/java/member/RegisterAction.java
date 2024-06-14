@@ -52,17 +52,17 @@ public class RegisterAction extends Action {
         // パスワード形式チェック
 		if (!(m.matches())) {
 			member.setPassword("");
-			return "r️egister-formaterror.jsp";		
+			return "formaterror.jsp";
 		}
 		// 確認パスワード同値チェック
 		if (!(password.equals(password2))) {
 			member.setPassword("");
-			return "r️egister-matcherror.jsp";
+			return "matcherror.jsp";
 		}
 		// 未入力チェック
 		if (login.isEmpty() || simei.isEmpty() || mail.isEmpty() || tel.isEmpty() || postcode.isEmpty()
 				|| prefecture.isEmpty() || city.isEmpty()|| address.isEmpty()) {
-			return "r️egister-emptyerror.jsp";
+			return "emptyerror.jsp";
 		}
 		
 		MemberRegisterDAO daoMem = new MemberRegisterDAO();
@@ -71,9 +71,9 @@ public class RegisterAction extends Action {
 		if (line == 1) {
 			// セッションスコープの登録情報削除
 			session.removeAttribute("MEMBER");
-			return "r️egister-success.jsp";
+			return "success.jsp";
 		}
-		return "r️egister-error.jsp";
+		return "error.jsp";
 	}
 	
 }
