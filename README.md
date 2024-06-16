@@ -7,7 +7,7 @@
 <br>
 <br>
 ### ■ER図（DB概念・論理設計）
-![](https://github.com/yasshy-jp/3kanyama/blob/master/diagrams/ER%E5%9B%B3%E3%81%BF%E3%81%8B%E3%82%93%E5%B1%B1.drawio.png)
+![](https://github.com/yasshy-jp/3kanyama/blob/master/diagrams/ER%E5%9B%B3%E3%81%BF%E3%81%8B%E3%82%93.drawio.png)
 <br>
 <br>
 ### ■画面遷移図（ログイン）
