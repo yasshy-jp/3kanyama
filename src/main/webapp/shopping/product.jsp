@@ -54,7 +54,16 @@
 								</tr>
 								<tr>
 									<td>商品${product.id}</td>
-									<td>${product.name}：${product.stock>0 ? "在庫あり" : "在庫なし"}</td>
+									<td>${product.name}</td>
+								</tr>
+								<tr>
+									<td>在庫</td>
+									<td>
+										<c:choose>
+											<c:when test="${product.stock>0}">${product.stock}個	</c:when>
+											<c:otherwise>在庫なし	</c:otherwise>
+										</c:choose>
+									</td>
 								</tr>
 								<tr>
 									<td>${product.price}円</td>

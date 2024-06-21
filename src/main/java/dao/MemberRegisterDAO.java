@@ -9,6 +9,7 @@ import bean.Member;
 public class MemberRegisterDAO extends DAO {
 	/***** 新規会員登録機能 *****/
 	public int r️egister(Member member) throws Exception {
+		// 変数の設定
 		int line = 0;
         Connection con = null;
         PreparedStatement st = null;
@@ -49,6 +50,7 @@ public class MemberRegisterDAO extends DAO {
 
             con.setAutoCommit(true);
         } catch (Exception e) {
+        	// ロールバック
             if (con != null) {
                 try {
                     con.rollback();
@@ -58,6 +60,7 @@ public class MemberRegisterDAO extends DAO {
             }
             e.printStackTrace();
         } finally {
+        	// リソースの解放
             if (rs != null) {
                 try {
                     rs.close();
