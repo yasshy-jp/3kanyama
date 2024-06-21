@@ -21,7 +21,7 @@ public class CartAddAction extends Action {
 		HttpSession session = request.getSession();
 		
 		int id = Integer.parseInt(request.getParameter("id"));  // 商品ID
-		int addQuantity = Integer.parseInt(request.getParameter("addQuantity"));  // カートへ追加の個数
+		int addQuantity = Integer.parseInt(request.getParameter("addQuantity"));  // カートへ追加の個数 
 		int totalPrice = 0; // 合計金額
 		int totalCount = 0; // 合計個数
 		int totalPrice_taxIn = 0; //税込み合計金額
@@ -32,12 +32,21 @@ public class CartAddAction extends Action {
 		if (cart == null) {
 			cart = new ArrayList<Item>();
 			session.setAttribute("CART", cart);
-		}	
+		}
 		// カート内に追加商品と同種商品が存在する場合は個数を更新し、newItemAdd_indicatorを"off"に設定
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
 				item.setCount(item.getCount() + addQuantity);
 				newItemAdd_indicator = "off";
+				
+				/* 在庫の更新
+				int stock = item.getProduct().getStock() - addQuantity;
+				ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
+				int line = psrdao.r️egister(id, stock);
+				if (line != 1) {
+					return "stock-register-error.jsp";
+				}
+				*/
 				break;
 			}
 		}
