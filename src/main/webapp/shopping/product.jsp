@@ -68,17 +68,32 @@
 								<tr>
 									<td>${product.price}円</td>
 									<td>
-										<form action = "CartAdd.action" method = "post">
-											<input type="hidden" name="id" value="${product.id}">
-											<select name = "addQuantity">
-												<%-- 繰り返し回数の指定（SBC P341）--%>
-												<c:forEach var = "i" begin = "1" end = "20">
-													<option value = "${i}">${i}</option>
-												</c:forEach>
-											</select>
-											個
-											<input type = "submit" value = "カートに追加">
-										</form>
+										<c:choose>
+											<c:when test="${product.stock>0}">
+												<form action = "CartAdd.action" method = "post">
+													<input type="hidden" name="id" value="${product.id}">
+													<select name = "addQuantity">
+														<%-- 繰り返し回数の指定（SBC P341）--%>
+														<c:forEach var = "i" begin = "1" end = "20">
+															<option value = "${i}">${i}</option>
+														</c:forEach>
+													</select>
+													個
+													<input type = "submit" value = "カートに追加">
+												</form>	
+											</c:when>
+											<c:otherwise>
+												<form action = ""  method = "post">
+													<input type="hidden" name="id" value="${product.id}">
+													<select name = "addQuantity">
+														<option value="0">0&ensp;</option>
+													</select>
+													個
+													<input type = "submit" value = "カートに追加">
+												</form>
+											</c:otherwise>
+										</c:choose>
+										
 									</td>
 								</tr>
 							</table>

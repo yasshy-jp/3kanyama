@@ -16,13 +16,14 @@ public class ProductAction extends Action {
 		) throws Exception {
 		
 		HttpSession session = request.getSession();
-		String keyword = request.getParameter("keyword");		
 		int category = 0;
-
+		
 		// 品目検索のリクエスト（"category" = 1〜4）が来た際は、プリミティブ型に変換
 		if (request.getParameter("category") != null) {
 			category = Integer.parseInt(request.getParameter("category"));
 		}
+		// キーワード検索で
+		String keyword = request.getParameter("keyword");
 		
 		// キーワードと品目ともにデフォルト値の場合に全商品を表示さすための設定
 		if (keyword == null && category == 0) keyword = "";
