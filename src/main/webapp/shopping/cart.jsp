@@ -22,7 +22,7 @@
 								</div>
 								<div class="btn-regi_or_con">
 									<p class="choice"><a href="Preview.action" class="btn btnBig register">レジに進む</a></p>
-									<p class="choice"><a href="Product.action" class="btn btnBig continue">買い物を続ける</a></p>
+									<p class="choice"><a href="product.jsp" class="btn btnBig continue">買い物を続ける</a></p>
 								</div>
 							</c:when>
 							<c:otherwise>
