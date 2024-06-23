@@ -19,8 +19,12 @@ public class CartAddAction extends Action {
 			HttpServletRequest request, HttpServletResponse response
 		) throws Exception {
 		
+		// 商品(Bean)を格納するカート(List)や検索商品リストをセッションスコープから取得
 		HttpSession session = request.getSession();
+		List<Product> list = (List<Product>)session.getAttribute("LIST");  //商品リスト
+		List<Item> cart = (List<Item>)session.getAttribute("CART");
 		
+		// 追加商品等の情報取得と設定
 		int id = Integer.parseInt(request.getParameter("id"));  // 商品ID
 		int addQuantity = Integer.parseInt(request.getParameter("addQuantity"));  // カートへ追加の個数 
 		int totalPrice = 0; // 合計金額
@@ -28,8 +32,6 @@ public class CartAddAction extends Action {
 		int totalPrice_taxIn = 0; //税込み合計金額
 		String newItemAdd_indicator = "on"; // 追加商品がカート内に既に存在するかどうかの指標("on"は新たな商品)
 				
-		// 商品(Bean)を格納するカート(List)をセッションスコープから取得
-		List<Item> cart = (List<Item>)session.getAttribute("CART");
 		if (cart == null) {
 			cart = new ArrayList<Item>();
 		}
@@ -40,7 +42,7 @@ public class CartAddAction extends Action {
 				item.setCount(item.getCount() + addQuantity);
 				newItemAdd_indicator = "off";
 				
-				// 在庫の更新
+				// 商品DBの在庫の更新
 				int stock = item.getProduct().getStock() - addQuantity;
 				ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
 				int line = psrdao.r️egister(id, stock);
@@ -48,7 +50,7 @@ public class CartAddAction extends Action {
 					return "stock-register-error.jsp";
 				}
 				
-				// セッションスコープの商品在庫更新
+				// 商品リストの在庫表示の更新（セッションスコープの商品在庫の更新）
 				item.getProduct().setStock(stock);
 				System.out.println("同種" + item.getProduct().getStock());
 				
@@ -59,14 +61,13 @@ public class CartAddAction extends Action {
 		
 		// カート内に同種商品が存在していない場合は新たに商品情報を追加
 		if(newItemAdd_indicator == "on") {
-			List<Product> list = (List<Product>)session.getAttribute("LIST");  //商品リスト
 			for (Product p : list) {
 				if (p.getId() == id) {
 					Item item = new Item();
 					item.setProduct(p);
 					item.setCount(addQuantity);
 					
-					// 商品DBの在庫更新
+					// 商品DBの在庫の更新
 					int stock = p.getStock() - addQuantity;
 					ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
 					int line = psrdao.r️egister(id, stock);
@@ -74,7 +75,7 @@ public class CartAddAction extends Action {
 						return "stock-register-error.jsp";
 					}
 					
-					// セッションスコープの商品在庫更新
+					// 商品リストの在庫表示の更新（セッションスコープの商品在庫の更新）
 					p.setStock(stock);
 					System.out.println("新規" + p.getStock());
 					
@@ -95,6 +96,7 @@ public class CartAddAction extends Action {
 		session.setAttribute("TOTALPRICE_TAXIN", totalPrice_taxIn);
 		session.setAttribute("TOTALPRICE", totalPrice);
 		session.setAttribute("TOTALCOUNT", totalCount);
+		session.setAttribute("LIST", list);
 		session.setAttribute("CART", cart);
 		return "cart.jsp";	
 	}
