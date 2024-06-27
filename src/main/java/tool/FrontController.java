@@ -1,7 +1,6 @@
 package tool;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,7 +16,7 @@ public class FrontController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		response.setContentType("text/html; charset=UTF-8");
-		PrintWriter out=response.getWriter();
+		//PrintWriter out=response.getWriter();
 		
 		try {
 			// Fコントローラが呼び出されたパスを取得し、先頭一文字を除去（/chapter24/Login.action → chapter24/Login.action）			
@@ -30,13 +29,28 @@ public class FrontController extends HttpServlet {
 			String url = action.execute(request, response);
 			// 指定されたフォワード先（jspファイル）へフォワード
 			request.getRequestDispatcher(url).forward(request, response);
-		} catch (Exception e) {
-			e.printStackTrace(out);
-		}
+		} catch (ClassNotFoundException e) {
+            handleException(response, "Requested action not found.", e);
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+            handleException(response, "Error creating action instance.", e);
+        } catch (Exception e) {
+            handleException(response, "An unexpected error occurred.", e);
+        }
 	}
+	
+	// 例外のハンドリング
+	private void handleException(HttpServletResponse response, String message, Exception e) throws IOException {
+        // ログに例外の詳細を記録（ここでは標準エラー出力に記録）
+        e.printStackTrace();
+        //e.printStackTrace(out); スタックトレースをクライアントへ直接出力（開発中のみ有用）
+        
+        // クライアントに対して簡潔なエラーメッセージを表示
+        response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, message);
+    }
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		doPost(request, response);
 		//doGetもdoPostを呼ぶ。よってGETリクエストもPOSTリクエストも同じ処理を行う。
 	}
+
 }
