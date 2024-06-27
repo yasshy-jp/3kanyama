@@ -58,7 +58,8 @@ public class MemberRegisterDAO extends DAO {
                     rollbackEx.printStackTrace();
                 }
             }
-            e.printStackTrace();
+            //e.printStackTrace();
+            throw e;  // 再スローすることでJVMは伝番（throws宣言）に処理を移す。
         } finally {
         	// リソースの解放
             if (rs != null) {
@@ -77,6 +78,8 @@ public class MemberRegisterDAO extends DAO {
             }
             if (con != null) {
                 try {
+                	// オートコミットをデフォルト状態に戻す
+                	con.setAutoCommit(true);
                     con.close();
                 } catch (Exception conEx) {
                     conEx.printStackTrace();
