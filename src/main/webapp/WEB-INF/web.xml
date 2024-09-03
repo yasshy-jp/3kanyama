@@ -6,28 +6,4 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
 	http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
 	version="4.0">
-	<!-- H2DBappのWebapp起動と連動起動の設定 -->
-	<context-param>
-		<!-- 接続先のURL -->
-		<param-name>db.url</param-name>
-		<param-value>jdbc:h2:tcp://localhost/~/DB/docoTsubu</param-value>
-	</context-param>
-	<context-param>
-		<!-- 接続先のユーザ名 -->
-		<param-name>db.user</param-name>
-		<param-value>yasushi</param-value>
-	</context-param>
-	<context-param>
-		<!-- 接続先のパスワード -->
-		<param-name>db.password</param-name>
-		<param-value>8afdetH2d</param-value>
-	</context-param>
-	<context-param>
-		<!-- サーバモードで起動するための指定 -->
-		<param-name>db.tcpServer</param-name>
-		<param-value>-tcpAllowOthers</param-value>
-	</context-param>
-	<listener>
-		<listener-class>org.h2.server.web.DbStarter</listener-class>
-	</listener>
 </web-app>
