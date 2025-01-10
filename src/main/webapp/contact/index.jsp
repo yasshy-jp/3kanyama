@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8"%>
+<%@page contentType="text/html; charset=UTF-8"%>
 <%@include file="../header.jsp" %>
 
         <div class="top-wrapper_contact">
