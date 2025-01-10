@@ -1,4 +1,4 @@
-<%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ja">
 
@@ -11,9 +11,9 @@
         <%-- フリーアイコン読み込み設定。＊読込み位置によりdisplay:プロパティでの要素の表示に影響あり --%>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/normalize.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/style.css">
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/common/css/responsive.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/style.css">
+        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/responsive.css">
         <%-- 使用するライブラリ jQuery, stickfill.jsの読込み ＊jqを利用するFileより前で読み込むこと --%>
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/stickyfill/2.1.0/stickyfill.min.js"></script>

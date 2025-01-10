@@ -30,7 +30,8 @@ public class CartAddAction extends Action {
 		int totalPrice = 0; // 合計金額
 		int totalCount = 0; // 合計個数
 		int totalPrice_taxIn = 0; //税込み合計金額
-		String newItemAdd_indicator = "on"; // 追加商品がカート内に既に存在するかどうかの指標("on"は新たな商品)
+		String newItemAdd_indicator = "on";
+		// 追加商品がカート内に既存するかどうかの指標(デフォルト値の"on"は既存しない新たな商品を追加することを示す)
 				
 		if (cart == null) {
 			cart = new ArrayList<Item>();
