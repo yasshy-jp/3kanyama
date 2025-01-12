@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Item;
@@ -24,9 +23,7 @@ import tool.Action;
 
 public class PurchaseAction extends Action {
 	@SuppressWarnings("unchecked")
-	public String execute(
-		HttpServletRequest request, HttpServletResponse response
-	) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		

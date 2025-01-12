@@ -24,8 +24,12 @@ public class EncodingFilter extends HttpFilter implements Filter {
 		 * ファイル自体を読み込む際の文字エンコーディング指定を兼ねているためJSPでは省略できない。
 		 */
 
+		//（１）サーブレットやJSPの呼び出し前に行う処理
 		//System.out.println("フィルタの前処理");
+		/**（２）次に実行すべきフィルタがあればそれを実行する。
+		なければリクエストされたサーブレットやJSPを呼ぶ機能があるため必須のメソッド。*/
 		chain.doFilter(request, response);
+		//（３）サーブレットやJSPの呼び出し後に行う処理
 		//System.out.println("フィルタの後処理");
 	}
 

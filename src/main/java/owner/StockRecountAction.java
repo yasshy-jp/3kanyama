@@ -3,7 +3,6 @@ package owner;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Stock;
@@ -12,9 +11,8 @@ import tool.Action;
 
 // 商品在庫の追加処理
 public class StockRecountAction extends Action {
-
 	@SuppressWarnings("unchecked")
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 
 		HttpSession session = request.getSession();
 		// 在庫変更する商品IDの取得

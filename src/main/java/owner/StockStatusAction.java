@@ -3,7 +3,6 @@ package owner;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Owner;
@@ -12,9 +11,7 @@ import dao.StockDAO;
 import tool.Action;
 
 public class StockStatusAction extends Action {
-	public String execute(
-		HttpServletRequest request, HttpServletResponse response
-	) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		Owner owner = (Owner)session.getAttribute("OWNER");  // オーナーオブジェクト

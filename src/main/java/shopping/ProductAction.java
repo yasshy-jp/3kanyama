@@ -3,7 +3,6 @@ package shopping;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Product;
@@ -11,9 +10,7 @@ import dao.ProductSearchDAO;
 import tool.Action;
 // オンラインショップ商品一覧ページの生成
 public class ProductAction extends Action {
-	public String execute(
-			HttpServletRequest request, HttpServletResponse response
-		) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		int category = 0;

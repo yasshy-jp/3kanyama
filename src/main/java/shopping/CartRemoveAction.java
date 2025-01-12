@@ -3,7 +3,6 @@ package shopping;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Item;
@@ -11,9 +10,7 @@ import tool.Action;
 //カート内の商品削除に伴う各種合計データの更新
 public class CartRemoveAction extends Action {
 	@SuppressWarnings("unchecked")
-	public String execute(
-		HttpServletRequest request, HttpServletResponse response
-	) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 		int id = Integer.parseInt(request.getParameter("id"));  // 削除商品のID取得
