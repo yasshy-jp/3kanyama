@@ -26,7 +26,7 @@ public class FrontController extends HttpServlet {
 			// アクションのクラス名からインスタンス（アクション）を生成。ポリモーフィズムで親クラスのActionとしてざっくり捉える。
 			Action action = (Action)Class.forName(name).getDeclaredConstructor().newInstance();
 			// 子クラスである〇〇Actionのインスタンスに対してexecute()メソッドを呼ぶ。戻り値はフォワード先のURL（jspファイル）
-			String url = action.execute(request, response);
+			String url = action.execute(request);
 			// 指定されたフォワード先（jspファイル）へフォワード
 			request.getRequestDispatcher(url).forward(request, response);
 		} catch (ClassNotFoundException e) {
