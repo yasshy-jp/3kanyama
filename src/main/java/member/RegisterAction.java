@@ -4,7 +4,6 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Member;
@@ -12,9 +11,7 @@ import dao.MemberRegisterDAO;
 import tool.Action;
 /***** 新規会員登録機能 *****/
 public class RegisterAction extends Action {
-	public String execute(
-			HttpServletRequest request, HttpServletResponse response
-		) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
 			

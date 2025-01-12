@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Item;
@@ -13,11 +12,8 @@ import dao.ProductStockRegisterDAO;
 import tool.Action;
 // カートの準備とカートへの商品追加および各種合計データの計算
 public class CartAddAction extends Action {
-	
 	@SuppressWarnings("unchecked")
-	public String execute(
-			HttpServletRequest request, HttpServletResponse response
-		) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 		
 		// 商品(Bean)を格納するカート(List)や検索商品リストをセッションスコープから取得
 		HttpSession session = request.getSession();

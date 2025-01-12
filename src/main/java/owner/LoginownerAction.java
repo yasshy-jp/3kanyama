@@ -1,7 +1,6 @@
 package owner;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import bean.Owner;
@@ -9,9 +8,7 @@ import dao.OwnerDAO;
 import tool.Action;
 
 public class LoginownerAction extends Action {
-	public String execute(
-			HttpServletRequest request, HttpServletResponse response
-		) throws Exception {
+	public String execute(HttpServletRequest request) throws Exception {
 
 			HttpSession session=request.getSession();
 
