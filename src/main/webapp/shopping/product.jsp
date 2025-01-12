@@ -13,8 +13,8 @@
 			<!-- キーワード検索 -->
 			<div class="searchText">
 				<form action="Product.action" method="post">
-					<input type="text" name="keyword" value="${KEYWORD}"> <input
-						type="submit" value="検索">
+					<input type="text" name="keyword" value="${KEYWORD}">
+					<input type="submit" value="検索">
 				</form>
 			</div>
 			<!-- 品目検索 -->
@@ -59,10 +59,12 @@
 						</tr>
 						<tr>
 							<td>在庫</td>
-							<td><c:choose>
+							<td>
+								<c:choose>
 									<c:when test="${product.stock>0}">${product.stock}個	</c:when>
 									<c:otherwise>欠品中</c:otherwise>
-								</c:choose></td>
+								</c:choose>
+							</td>
 						</tr>
 						<tr>
 							<td>${product.price}円</td>
