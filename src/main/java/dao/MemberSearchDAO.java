@@ -21,7 +21,7 @@ public class MemberSearchDAO extends DAO {
 		st.setString(2, password);
 		ResultSet rs=st.executeQuery();
 
-		while (rs.next()) {
+		if (rs.next()) {
 			member = new Member();
 			member.setId(rs.getInt("member_id"));
 			member.setCustomer_id(rs.getString("customer_id"));

@@ -4,9 +4,9 @@
         <div id="login-wrapper">
             <div class="container">
                 <div class="heading">
-                	<h2>Operation Manager Site</h2>
+                	<h2>Owner Login</h2>
                 	<br>
-					<p class="translation"><a href = "OrderStatus.action">受注状況へ</a></p>
+					<p class="translation"><a href = "Loginowner.action">オーナーHOMEへ</a></p>
                 	<form action="Loginowner.action" method="post">
 						<p>ログイン名</p><input type="text" name="login" class="text">
 						<p>パスワード</p><input type="password" name="password" class="password">

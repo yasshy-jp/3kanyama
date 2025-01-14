@@ -11,7 +11,11 @@ public class LoginownerAction extends Action {
 	public String execute(HttpServletRequest request) throws Exception {
 
 			HttpSession session=request.getSession();
-
+			
+			if (session.getAttribute("OWNER")!=null) {
+				return "login-out_owner.jsp";
+			}
+			
 			String login=request.getParameter("login");
 			String password=request.getParameter("password");
 
