@@ -6,7 +6,8 @@
         <div class="container">
             <div class="heading">
              	<c:if test="${OWNER.name!=null}">
-	             	<h2>Hello! ${OWNER.name}さん。</h2>
+	             	<h2>Operation Manager Site</h2>
+	             	<p>Hello! ${OWNER.name}さん。</p>
          		</c:if>
          		<br>
          		<a href = "OrderStatus.action">受注状況へ</a>
