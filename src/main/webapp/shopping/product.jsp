@@ -92,7 +92,7 @@
 												<%-- 空白を示す文字エンティティ：&ensp; --%>
 												<option value="0">0&ensp;</option>
 											</select>
-											<button type="button" disabled aria-disabled="true" title="欠品中">カートに追加</button>
+											<button type="button" disabled aria-disabled="true" title="欠品中">入荷待ち</button>
 										</div>
 									</c:otherwise>
 								</c:choose>
