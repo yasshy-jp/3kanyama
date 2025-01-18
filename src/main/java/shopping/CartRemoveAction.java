@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import bean.Item;
+import dao.ProductStockRegisterDAO;
 import tool.Action;
 //カート内の商品削除に伴う各種合計データの更新
 public class CartRemoveAction extends Action {
@@ -29,7 +30,17 @@ public class CartRemoveAction extends Action {
 				session.setAttribute("TOTALPRICE_TAXIN", totalPrice_taxIn);
 				session.setAttribute("TOTALPRICE", totalPrice);
 				session.setAttribute("TOTALCOUNT", totalCount);
-				// カートから商品を削除
+				
+				// 商品DBの在庫の更新
+				int stock = item.getProduct().getStock() + item.getCount();
+				ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
+				int line = psrdao.r️egister(id, stock);
+				if (line != 1) return "stock-register-error.jsp";
+				
+				// セッションに保存中の商品（リスト）の在庫更新
+				item.getProduct().setStock(stock);
+				System.out.println("「" + item.getProduct().getName() + "」を削除。在庫が「" + item.getProduct().getStock() + "個」に復活。");
+				
 				cart.remove(item);
 				break;
 			}
