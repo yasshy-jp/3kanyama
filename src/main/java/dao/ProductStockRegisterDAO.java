@@ -6,19 +6,19 @@ import java.sql.ResultSet;
 
 /******* 商品在庫の更新 *******/
 public class ProductStockRegisterDAO extends DAO {
-	public int r️egister(int id, int recount) throws Exception {
+	public int r️egister(int id, int stock) throws Exception {
 		int line = 0;
 		try {
 			Connection con = getConnection();
 			con.setAutoCommit(false);
 
 			PreparedStatement st = con.prepareStatement("update farmproduct set stock=? where product_id=?");
-			st.setInt(1, recount);
+			st.setInt(1, stock);
 			st.setInt(2, id);
 			st.executeUpdate();
 
 			st = con.prepareStatement("select * from farmproduct where stock=? && product_id=?");
-			st.setInt(1, recount);
+			st.setInt(1, stock);
 			st.setInt(2, id);
 			ResultSet rs = st.executeQuery();
 			while (rs.next()) {
