@@ -6,7 +6,7 @@
         <div class="container">
             <div class="heading">
              	<c:if test="${OWNER.name!=null}">
-	             	<h2>Operation Manager Site</h2>
+	             	<h2>Owner's site home</h2>
 	             	<p>Hello! ${OWNER.name}さん。</p>
          		</c:if>
          		<br>
