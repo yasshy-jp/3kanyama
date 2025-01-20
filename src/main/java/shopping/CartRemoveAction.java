@@ -22,7 +22,7 @@ public class CartRemoveAction extends Action {
 		
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
-				// カート内の合計個数と金額を再計算				 
+				// カート内の合計個数と金額を再計算
 				totalPrice -= item.getProduct().getPrice() * item.getCount();
 				totalCount -= item.getCount();
 				// 税込み合計金額を計算し、各更新情報をセッションスコープへ格納
@@ -37,9 +37,11 @@ public class CartRemoveAction extends Action {
 				int line = psrdao.r️egister(id, stock);
 				if (line != 1) return "stock-register-error.jsp";
 				
-				// セッションに保存中の商品（リスト）の在庫更新
+				// セッションに保存中の商品（"LIST"の要素）の在庫更新
 				item.getProduct().setStock(stock);
-				System.out.println("「" + item.getProduct().getName() + "」を削除。在庫が「" + item.getProduct().getStock() + "個」に復活。");
+				// 動作確認用コード
+				System.out.println("「" + item.getProduct().getName() + "」を削除。在庫が「"
+				+ item.getProduct().getStock() + "個」に復活。");
 				
 				cart.remove(item);
 				break;
