@@ -45,10 +45,11 @@ public class CartAddAction extends Action {
 				int line = psrdao.r️egister(id, stock);
 				if (line != 1) return "stock-register-error.jsp";
 				
-				// セッションに保存中の商品（リスト）の在庫更新
+				// セッションに保存中の商品（"LIST"の要素）の在庫更新
 				item.getProduct().setStock(stock);
 				// 動作確認用コード
-				System.out.println("同種商品「" + item.getProduct().getName() + "」の追加。在庫は「" + item.getProduct().getStock() + "個」に減少。");
+				System.out.println("同種商品「" + item.getProduct().getName() + 
+						"」の追加。在庫は「" + item.getProduct().getStock() + "個」に減少。");
 				break;
 			}
 		}
@@ -67,9 +68,11 @@ public class CartAddAction extends Action {
 					int line = psrdao.r️egister(id, stock);
 					if (line != 1) return "stock-register-error.jsp";
 					
-					// セッションに保存中の商品（リスト）の在庫更新
+					// セッションに保存中の商品（"LIST"の要素）の在庫更新
 					p.setStock(stock);
-					System.out.println("新規商品「" + p.getName() + "」の追加。在庫は「" + p.getStock() + "個」に減少。");
+					// 動作確認用コード
+					System.out.println("新規商品「" + p.getName() + "」"
+							+ "の追加。在庫は「" + p.getStock() + "個」に減少。");
 					
 					cart.add(item);
 					break;
