@@ -17,7 +17,7 @@
 									<p class="total">合計${TOTALCOUNT}個（${CART.size()}種類）</p>
 									<p>
 										<strong  class="totalPrice">¥${TOTALPRICE_TAXIN}</strong>
-										<span class="tax">（内消費税¥${TOTALPRICE_TAXIN - TOTALPRICE}）</span>
+										<span class="tax">（税込）</span>
 									</p>
 								</div>
 								<div class="btn-regi_or_con">

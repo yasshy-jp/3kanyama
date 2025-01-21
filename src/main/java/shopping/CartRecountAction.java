@@ -8,28 +8,24 @@ import javax.servlet.http.HttpSession;
 import bean.Item;
 import dao.ProductStockRegisterDAO;
 import tool.Action;
-// カート内での数量変更に伴う各種合計データの更新
+// カート内商品の数量変更を行うクラス
 public class CartRecountAction extends Action {
 	@SuppressWarnings("unchecked")
 	public String execute(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		// 数量変更する商品IDを取得
-		int id = Integer.parseInt(request.getParameter("id"));
-		// 数量変更する商品数量を取得
-		int recount = Integer.parseInt(request.getParameter("recount"));
-		// 商品を格納するカートの取得
-		List<Item> cart = (List<Item>)session.getAttribute("CART");
-		// 現在の合計金額と個数の取得
-		int totalPrice = (int)session.getAttribute("TOTALPRICE");
-		int totalCount = (int)session.getAttribute("TOTALCOUNT");
+		int id = Integer.parseInt(request.getParameter("id")); // 商品ID
+		int recount = Integer.parseInt(request.getParameter("recount")); // 変更数量
+		List<Item> cart = (List<Item>)session.getAttribute("CART"); // 商品カート
+		int totalPrice_taxIn = (int)session.getAttribute("TOTALPRICE_TAXIN"); // 合計金額（税込）
+		int totalCount = (int)session.getAttribute("TOTALCOUNT"); // 合計個数
 		
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
 				// 数量増加時
 				if(item.getCount() < recount) {
 					int incrementCount = recount - item.getCount();  // 増加個数
-					totalPrice += item.getProduct().getPrice() * incrementCount;
+					totalPrice_taxIn += (int)(item.getProduct().getPrice() * incrementCount * 1.1);
 					totalCount += incrementCount;
 					// カート内商品の個数の更新（"CART"の要素）					
 					item.setCount(recount);
@@ -49,7 +45,7 @@ public class CartRecountAction extends Action {
 				// 数量減少時
 				}else if(item.getCount() > recount){
 					int decrementCount = item.getCount() - recount;  // 減少個数
-					totalPrice -= item.getProduct().getPrice() * decrementCount;
+					totalPrice_taxIn -= (int)(item.getProduct().getPrice() * decrementCount * 1.1);
 					totalCount -= decrementCount;
 					// カート内商品の個数の更新（"CART"の要素）
 					item.setCount(recount);
@@ -71,9 +67,7 @@ public class CartRecountAction extends Action {
 				}
 				
 				// 税込み合計金額を再計算し、各種合計データをスコープへ再格納
-				int totalPrice_taxIn = (int)(totalPrice * 1.1);
 				session.setAttribute("TOTALPRICE_TAXIN", totalPrice_taxIn);
-				session.setAttribute("TOTALPRICE", totalPrice);
 				session.setAttribute("TOTALCOUNT", totalCount);
 				break;
 			}

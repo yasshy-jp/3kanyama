@@ -10,20 +10,18 @@ import bean.Item;
 import bean.Product;
 import dao.ProductStockRegisterDAO;
 import tool.Action;
-// カートへの商品追加および各種合計データの計算
+// カートへ商品を追加するクラス
 public class CartAddAction extends Action {
 	@SuppressWarnings("unchecked")
 	public String execute(HttpServletRequest request) throws Exception {
 		
-		// 各種情報取得と設定
 		HttpSession session = request.getSession();
 		List<Product> list = (List<Product>)session.getAttribute("LIST");  //商品リスト
 		List<Item> cart = (List<Item>)session.getAttribute("CART");  // 商品カート
 		int id = Integer.parseInt(request.getParameter("id"));  // 商品ID
 		int addQuantity = Integer.parseInt(request.getParameter("addQuantity"));  // 追加商品の個数
-		int totalPrice = 0; // 合計金額
+		int totalPrice_taxIn = 0; //合計金額（税込）
 		int totalCount = 0; // 合計個数
-		int totalPrice_taxIn = 0; //税込み合計金額
 		String newItemAdd_indicator = "on";  // onはカート内に既存しない種類の商品追加を示す指標
 					
 		if (cart == null) {
@@ -82,14 +80,12 @@ public class CartAddAction extends Action {
 		
 		// カート内の合計個数と金額の計算	
 		for (Item item : cart) {
-			totalPrice += item.getProduct().getPrice() * item.getCount();
+			totalPrice_taxIn += (int)(item.getProduct().getPrice() * item.getCount() * 1.1);
 			totalCount += item.getCount();
 		}
 		
 		// 計算結果のセッションスコープへの格納
-		totalPrice_taxIn = (int)(totalPrice * 1.1);
 		session.setAttribute("TOTALPRICE_TAXIN", totalPrice_taxIn);
-		session.setAttribute("TOTALPRICE", totalPrice);
 		session.setAttribute("TOTALCOUNT", totalCount);
 		return "cart.jsp";	
 	}
