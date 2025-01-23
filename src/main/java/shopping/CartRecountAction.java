@@ -23,7 +23,7 @@ public class CartRecountAction extends Action {
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
 				// 数量増加時
-				if(item.getCount() < recount) {
+				if (item.getCount() < recount) {
 					int incrementCount = recount - item.getCount();  // 増加個数
 					totalPrice_taxIn += (int)(item.getProduct().getPrice() * incrementCount * 1.1);
 					totalCount += incrementCount;
@@ -43,7 +43,7 @@ public class CartRecountAction extends Action {
 							"」の個数追加により、在庫が「" + item.getProduct().getStock() + "個」に減少。");
 										
 				// 数量減少時
-				}else if(item.getCount() > recount){
+				} else if (item.getCount() > recount) {
 					int decrementCount = item.getCount() - recount;  // 減少個数
 					totalPrice_taxIn -= (int)(item.getProduct().getPrice() * decrementCount * 1.1);
 					totalCount -= decrementCount;
@@ -62,7 +62,7 @@ public class CartRecountAction extends Action {
 					System.out.println("カート内で「" + item.getProduct().getName() + 
 							"」の個数減少により、在庫が「" + item.getProduct().getStock() + "個」に復活。");
 					
-				}else {
+				} else {
 					return "cart.jsp";
 				}
 				
