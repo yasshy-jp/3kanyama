@@ -8,7 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import bean.Item;
 import bean.Product;
-import dao.ProductStockRegisterDAO;
+import dao.UpdateStockDAO;
 import tool.Action;
 // カートへ商品を追加するクラス
 public class CartAddAction extends Action {
@@ -33,18 +33,17 @@ public class CartAddAction extends Action {
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
 				
-				// 購入商品の個数更新
+				// 商品DBの在庫確認と更新（カートに追加時）
+				UpdateStockDAO udsdao = new UpdateStockDAO();
+				int line = udsdao.updateStock(id, addQuantity);
+				if (line != 1) return "stockShortageError.jsp"; // 在庫不足
+				
+				// カート内商品の個数更新
 				item.setCount(item.getCount() + addQuantity);
-				newItemAdd_indicator = "off";
+				newItemAdd_indicator = "off";				
 				
-				// 商品DBの在庫更新
-				int stock = item.getProduct().getStock() - addQuantity;
-				ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
-				int line = psrdao.r️egister(id, stock);
-				if (line != 1) return "stock-register-error.jsp";
-				
-				// セッションに保存中の商品（"LIST"の要素）の在庫更新
-				item.getProduct().setStock(stock);
+				// セッションで管理中の商品の在庫更新（"LIST"の要素：List<Product> list）
+				item.getProduct().setStock(item.getProduct().getStock() - addQuantity);
 				// 動作確認用コード
 				System.out.println("同種商品「" + item.getProduct().getName() + 
 						"」の追加。在庫は「" + item.getProduct().getStock() + "個」に減少。");
@@ -60,14 +59,13 @@ public class CartAddAction extends Action {
 					item.setProduct(p);
 					item.setCount(addQuantity);
 					
-					// 商品DBの在庫更新
-					int stock = p.getStock() - addQuantity;
-					ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
-					int line = psrdao.r️egister(id, stock);
-					if (line != 1) return "stock-register-error.jsp";
+					// 商品DBの在庫確認と更新（カートに追加時）
+					UpdateStockDAO udsdao = new UpdateStockDAO();
+					int line = udsdao.updateStock(id, addQuantity);
+					if (line != 1) return "stockShortageError.jsp"; // 在庫不足
 					
-					// セッションに保存中の商品（"LIST"の要素）の在庫更新
-					p.setStock(stock);
+					// セッションで管理中の商品の在庫更新（"LIST"の要素：List<Product> list）
+					p.setStock(p.getStock() - addQuantity);
 					// 動作確認用コード
 					System.out.println("新規商品「" + p.getName() + "」"
 							+ "の追加。在庫は「" + p.getStock() + "個」に減少。");
