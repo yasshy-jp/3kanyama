@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 import exception.StockUpdateException;
 
-//商品DBの在庫確認と更新（カートに追加時）
+// 商品DBの在庫確認と減算（カートに追加時）
 public class UpdateStockDAO extends DAO {
 	// Logger を使い、詳細なエラーログを適切に記録
 	private static final Logger LOGGER = Logger.getLogger(UpdateStockDAO.class.getName());
@@ -36,7 +36,7 @@ public class UpdateStockDAO extends DAO {
             	} // ここで rs.close()
             } // ここで selectSt.close()
         	
-            // 2. 在庫を更新
+            // 2. 在庫を減算
         	try (PreparedStatement updateSt = con.prepareStatement(updateQuery)) {
         		updateSt.setInt(1, addQuantity);
         		updateSt.setInt(2, id);
@@ -57,9 +57,9 @@ public class UpdateStockDAO extends DAO {
             } else {
         		try {
         			con.rollback();  // 変更をキャンセル
-        			LOGGER.info("例外発生によるトランザクションのロールバック実行");
+        			LOGGER.info("トランザクションのロールバック実行");
         		} catch (SQLException rollbackEx) {
-        			LOGGER.severe("例外発生によるトランザクションのロールバック失敗: " + rollbackEx.getMessage());
+        			LOGGER.severe("トランザクションのロールバックに失敗: " + rollbackEx.getMessage());
         			// 未コミット（ロールバック失敗）のトランザクションはMySQLではcon.close()時に自動でロールバックされる
         		}
         	}
