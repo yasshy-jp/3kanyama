@@ -10,7 +10,7 @@ import bean.Product;
 //商品検索機能
 public class ProductSearchDAO extends DAO {
 	
-	public List<Product> search(String keyword, int category) throws Exception {
+	public List<Product> search(int category, String keyword) throws Exception {
 		List<Product> list=new ArrayList<>();
 
 		Connection con=getConnection();
@@ -19,7 +19,7 @@ public class ProductSearchDAO extends DAO {
 			"select * from farmproduct where name like ? or category_id=?");
 		st.setString(1, "%"+keyword+"%");
 		st.setInt(2, category);
-		ResultSet rs=st.executeQuery(); // DBの検索結果を取得するメソッド。結果はオブジェクトで返す。(p202)
+		ResultSet rs=st.executeQuery(); // DB検索結果オブジェクトを返す(p202参照)
 
 		while (rs.next()) {
 			Product p=new Product();
