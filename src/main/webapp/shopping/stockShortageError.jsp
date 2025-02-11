@@ -5,8 +5,8 @@
             <div class="container">
                 <div class="heading">
                 	<h2>ERROR</h2>
-               		<p>在庫登録エラー</p>
-            		<p><a href="register.jsp">会員登録ページへ戻る</a></p>
+               		<p>在庫不足のため、カートに追加できませんでした。</p>
+            		<p><a href="product.jsp">買い物を続ける</a></p>
             		
             		<br>
                 	<br>
