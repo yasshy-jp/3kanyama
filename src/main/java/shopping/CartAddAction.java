@@ -34,7 +34,7 @@ public class CartAddAction extends Action {
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
 
-				// 商品DBの在庫確認と更新（カートに追加時）
+				// 商品DBの在庫確認と減算（カートに追加時）
 				UpdateStockDAO udsdao = new UpdateStockDAO();
 				int line = udsdao.updateStock(id, addQuantity);
 				if (line != 1)
@@ -44,7 +44,7 @@ public class CartAddAction extends Action {
 				item.setCount(item.getCount() + addQuantity);
 				newItemAdd_indicator = "off";
 
-				// セッションで管理中の商品の在庫更新（"LIST"の要素：List<Product> list）
+				// 商品一覧画面出力用にセッションで管理中の在庫を更新（"LIST"の要素：List<Product>）
 				item.getProduct().setStock(item.getProduct().getStock() - addQuantity);
 				// 動作確認用コード
 				System.out.println("同種商品「" + item.getProduct().getName() +
@@ -67,7 +67,7 @@ public class CartAddAction extends Action {
 					if (line != 1)
 						return "stockShortageError.jsp"; // 在庫不足
 
-					// セッションで管理中の商品の在庫更新（"LIST"の要素：List<Product> list）
+					// 商品一覧画面出力用にセッションで管理中の在庫を更新（"LIST"の要素：List<Product>）
 					p.setStock(p.getStock() - addQuantity);
 					// 動作確認用コード
 					System.out.println("新規商品「" + p.getName() + "」"
