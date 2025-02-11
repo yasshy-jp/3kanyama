@@ -78,7 +78,10 @@ public class PurchaseAction extends Action {
 
 		try {
 			charge = Charge.create(chargeParams);
+			
+			System.out.println("与信枠が確保された支払い情報");
 			System.out.println(charge); // 与信枠が確保された支払い情報をコンソール出力
+			
         } catch (Exception e) {
         	e.printStackTrace();
         	return "credit_error.jsp";
@@ -98,7 +101,7 @@ public class PurchaseAction extends Action {
 		synchronized (this) {
 			// 最新の商品リストを取得
 			ProductSearchDAO dao = new ProductSearchDAO();
-			List<Product> list=dao.search("",0);
+			List<Product> list=dao.search(0, "");
 			// 最新の商品リストの在庫で、カートに追加した個数を賄えるか確認
 			for (Item item : cart) {
 				// 購入商品のID取得
@@ -110,6 +113,7 @@ public class PurchaseAction extends Action {
 						if(p.getStock() >= count){
 							break;
 						} else {
+							// 在庫不足の商品をレスポンスし、個数変更を促す。
 							return "stock-error.jsp";
 						}
 					}
@@ -126,7 +130,10 @@ public class PurchaseAction extends Action {
 			String ch_id = charge.getId(); // 課金IDを取得
 			try {
 				Charge ch = Charge.retrieve(ch_id);
+				
+				System.out.println("支払い結果");
 				System.out.println(ch.capture()); // 確定処理と結果（支払いオブジェクト）のコンソール出力
+				
 	        } catch (Exception e) {
 	        	e.printStackTrace();
 	        	return "credit-confirm_error.jsp";
@@ -164,9 +171,12 @@ public class PurchaseAction extends Action {
 		}
 		
 		session.removeAttribute("CART");
+		// 購入完了画面の表示
 		if (registerCard != null) {
+			// PAY.JP顧客（決済情報）新規登録者向け
 			return "purchase-out_register.jsp";
 		}
+			// PAY.JP顧客（決済情報）登録者および未登録者向け
 		return "purchase-out_member.jsp";
 	}
 

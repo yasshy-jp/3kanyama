@@ -5,14 +5,12 @@
 本ファイルはWebアプリケーションの設定ファイル。（ SBCreative p43 ）
 Serversのserver.xmlでも同様の設定ができるが、こっちの方が優先される模様(リロード設定で確認)
 -->
-
 <Context reloadable="true">
-<!--
+	<!--
 ↑自動リロードの設定。※但し、Newソースファイルをコンパイルした時は動かん。
 既に存在するクラスファイルを書き換えて再コンパイルした時のみ動作。
 デプロイ時は、Tomcatが常にファイル監視を行うため低速になるので解除したほうが良い。
 -->
-
 	<!-- 
 	↓データソース（アプリケーションサーバを利用してDBに接続する仕組み）の設定。
 	コネクションプールも使用可能になる。( SBCreative p182,196-198 ) -->
@@ -24,5 +22,5 @@ Serversのserver.xmlでも同様の設定ができるが、こっちの方が優
 		url="jdbc:mysql://localhost/MikanYama"
 		username="root"
 		password="8afdetSql"
-	/>
+	 />
 </Context>

@@ -14,13 +14,13 @@
 						<p class="total">合計${TOTALCOUNT}個（${CART.size()}種類）</p>
 						<p>
 							<strong class="totalPrice">¥${TOTALPRICE_TAXIN}</strong>
-							<span class="tax">（内消費税¥${TOTALPRICE_TAXIN - TOTALPRICE}）</span>
+							<span class="tax">（税込）</span>
 						</p>
 						<hr>
 						<form action="Purchase.action" method="post">
 						<%-- scriptタグ1行で、決済フォーム,カード情報のバリデーション,トークン化を行うフォームを生成するCheckoutライブラリ。
-						タグを埋め込んだ位置に、フォーム用の青いボタンと同時に <input type="hidden" name="payjp-token"> というコードが生成される。
-						入力されたカード情報は直接PAY.JPサーバーへ送信される。その後、一意のトークンが返され、前記のinputタグ内へセットされる。--%>
+						タグ埋め込み位置に、フォーム用の青いボタンと同時にコード（ <input type="hidden" name="payjp-token"> ）が生成される。
+						入力されたカード情報は直接PAY.JPサーバへ送信される。その後、一意のトークンが返され、前記のinputタグ内へセットされる。--%>
 							<script
 								type="text/javascript"
 								src="https://checkout.pay.jp/" <%-- チェックアウトライブラリのホスト先。scriptタグで読み込む。--%>
