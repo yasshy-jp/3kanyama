@@ -61,7 +61,7 @@
 							<td>在庫</td>
 							<td>
 								<c:choose>
-									<c:when test="${product.stock>0}">${product.stock}個	</c:when>
+									<c:when test="${product.stock>0}">${product.stock}個</c:when>
 									<c:otherwise>欠品中</c:otherwise>
 								</c:choose>
 							</td>
