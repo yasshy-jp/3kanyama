@@ -8,47 +8,49 @@ import java.util.logging.Logger;
 
 import exception.StockUpdateException;
 
-// 商品DBの在庫確認と減算（カートに追加時）
-public class UpdateStockDAO extends DAO {
+/*** 商品DBの在庫の更新（出庫時：カートに追加 or 購入確定） ***/
+public class OutputStockDAO extends DAO {
 	// Logger を使い、詳細なエラーログを適切に記録
-	private static final Logger LOGGER = Logger.getLogger(UpdateStockDAO.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(OutputStockDAO.class.getName());
 
-	public int updateStock(int id, int addQuantity) throws StockUpdateException {
+	public int outputStock(int id, int receivedQuantity) throws StockUpdateException {
 		String selectQuery = "select stock from farmproduct where product_id = ? for update";
-        String updateQuery = "update farmproduct set stock = stock - ? where product_id = ?";
+        String updateQuery = "update farmproduct set stock = ? where product_id = ?";
+        int newStock = 0; // 出庫数を引いた新たな在庫
         Connection con = null;
         
         try {
-        	con = getConnection();
-//        	System.out.println("コミットモード: " + con.getAutoCommit()); // true：自動、false：手動
+        	con = getConnection(); // コミットモード確認は con.getAutoCommit()
         	con.setAutoCommit(false); // 手動コミット設定（トランザクション開始）
 
-        	// 1. 在庫を確認
+        	// 1. 在庫の確認と減算
         	// 複数スレッドが同時に在庫を減らす時のデータの整合性を保つため、排他ロックをかける（FOR UPDATE）
         	try (PreparedStatement selectSt = con.prepareStatement(selectQuery)) {
         		selectSt.setInt(1, id);
             	try (ResultSet rs = selectSt.executeQuery()) {
-                    if (!rs.next() || rs.getInt("stock") < addQuantity) {
+                    if (!rs.next() || rs.getInt("stock") < receivedQuantity) {
                     	LOGGER.warning("在庫不足（商品ID: " + id + "）");
                     	con.rollback();
                     	return -1; // 在庫不足
-                    }
+                    } else {
+                    	newStock = rs.getInt("stock") - receivedQuantity;
+					}
             	} // ここで rs.close()
             } // ここで selectSt.close()
         	
-            // 2. 在庫を減算
+            // 2. 在庫を更新
         	try (PreparedStatement updateSt = con.prepareStatement(updateQuery)) {
-        		updateSt.setInt(1, addQuantity);
+        		updateSt.setInt(1, newStock);
         		updateSt.setInt(2, id);
         		int updatedRows = updateSt.executeUpdate();
             
         		if (updatedRows == 1) {
         			con.commit();
-        			return 1; // 成功
+        			return newStock; // 成功
         		} else {
         			LOGGER.warning("在庫更新失敗（商品ID: " + id + "）");
         			con.rollback();
-        			return -1; // 在庫不足
+        			return 0; // 失敗
         		}
             } // ここで updateSt.close()
         } catch (SQLException e) { // 独自のカスタム例外 StockUpdateException の作成を検討
