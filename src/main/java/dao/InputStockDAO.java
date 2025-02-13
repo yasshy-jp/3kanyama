@@ -8,47 +8,49 @@ import java.util.logging.Logger;
 
 import exception.StockUpdateException;
 
-//商品DBの在庫確認と更新（カートに追加時）
-public class UpdateStockDAO extends DAO {
+/*** 商品DBの在庫の更新（入庫時：補充 or 返却） ***/
+public class InputStockDAO extends DAO {
 	// Logger を使い、詳細なエラーログを適切に記録
-	private static final Logger LOGGER = Logger.getLogger(UpdateStockDAO.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(InputStockDAO.class.getName());
 
-	public int updateStock(int id, int addQuantity) throws StockUpdateException {
+	public int inputStock(int id, int receivedQuantity) throws StockUpdateException {
 		String selectQuery = "select stock from farmproduct where product_id = ? for update";
-        String updateQuery = "update farmproduct set stock = stock - ? where product_id = ?";
+        String updateQuery = "update farmproduct set stock = ? where product_id = ?";
+        int newStock =0; // 入庫数を足した新たな在庫
         Connection con = null;
         
         try {
         	con = getConnection();
-//        	System.out.println("コミットモード: " + con.getAutoCommit()); // true：自動、false：手動
         	con.setAutoCommit(false); // 手動コミット設定（トランザクション開始）
-
-        	// 1. 在庫を確認
-        	// 複数スレッドが同時に在庫を減らす時のデータの整合性を保つため、排他ロックをかける（FOR UPDATE）
+        	
+        	// 1. 在庫の加算
+        	// UPDATE 文だけでは「読み取り→更新」間の競合を防げないため、排他ロックをかける（FOR UPDATE）
         	try (PreparedStatement selectSt = con.prepareStatement(selectQuery)) {
         		selectSt.setInt(1, id);
             	try (ResultSet rs = selectSt.executeQuery()) {
-                    if (!rs.next() || rs.getInt("stock") < addQuantity) {
-                    	LOGGER.warning("在庫不足（商品ID: " + id + "）");
+                    if (!rs.next()) {
+                    	LOGGER.warning("商品が見つかりません（商品ID: " + id + "）");
                     	con.rollback();
-                    	return -1; // 在庫不足
-                    }
+                    	return -1; // DB検索エラー
+                    } else {
+                    	newStock = rs.getInt("stock") + receivedQuantity;
+					}
             	} // ここで rs.close()
-            } // ここで selectSt.close()
-        	
+        	} // ここで selectSt.close()
+
             // 2. 在庫を更新
         	try (PreparedStatement updateSt = con.prepareStatement(updateQuery)) {
-        		updateSt.setInt(1, addQuantity);
+        		updateSt.setInt(1, newStock);
         		updateSt.setInt(2, id);
         		int updatedRows = updateSt.executeUpdate();
             
         		if (updatedRows == 1) {
         			con.commit();
-        			return 1; // 成功
+        			return newStock; // 成功
         		} else {
         			LOGGER.warning("在庫更新失敗（商品ID: " + id + "）");
         			con.rollback();
-        			return -1; // 在庫不足
+        			return 0; // 失敗
         		}
             } // ここで updateSt.close()
         } catch (SQLException e) { // 独自のカスタム例外 StockUpdateException の作成を検討
@@ -57,9 +59,9 @@ public class UpdateStockDAO extends DAO {
             } else {
         		try {
         			con.rollback();  // 変更をキャンセル
-        			LOGGER.info("例外発生によるトランザクションのロールバック実行");
+        			LOGGER.info("トランザクションをロールバック");
         		} catch (SQLException rollbackEx) {
-        			LOGGER.severe("例外発生によるトランザクションのロールバック失敗: " + rollbackEx.getMessage());
+        			LOGGER.severe("トランザクションのロールバックに失敗: " + rollbackEx.getMessage());
         			// 未コミット（ロールバック失敗）のトランザクションはMySQLではcon.close()時に自動でロールバックされる
         		}
         	}

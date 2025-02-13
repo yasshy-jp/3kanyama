@@ -6,44 +6,37 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import bean.Stock;
-import dao.ProductStockRegisterDAO;
+import dao.InputStockDAO;
 import tool.Action;
 
-// 商品在庫の追加処理
+/*** 商品在庫の補充機能 ***/
 public class StockRecountAction extends Action {
 	@SuppressWarnings("unchecked")
 	public String execute(HttpServletRequest request) throws Exception {
 
 		HttpSession session = request.getSession();
-		// 在庫変更する商品IDの取得
-		int id = Integer.parseInt(request.getParameter("id"));
-		// 在庫変更する数量の取得
-		int stadd = Integer.parseInt(request.getParameter("stadd"));
-		// 現在の在庫(Bean)を格納した在庫リストをセッション属性から取得
-		List<Stock> stocklist = (List<Stock>) session.getAttribute("STOCKLIST");
-		// 更新された在庫数を格納する変数を用意
-		int recount = 0;
+		List<Stock> stocklist = (List<Stock>) session.getAttribute("STOCKLIST"); // 商品兼在庫リスト
+		int id = Integer.parseInt(request.getParameter("id")); // 商品ID
+		int addStockQuantity = Integer.parseInt(request.getParameter("addStockQuantity")); // 数量
+		int newStock = 0; // 更新後の在庫
 
-		for (Stock stock : stocklist) {
-			if (stock.getId() == id) {
-				// 在庫変動分を加減算
-				recount = stock.getStock() + stadd;
-				if (recount < 0) {
-					recount = 0;
+		// 商品DBの在庫の更新（補充）
+		InputStockDAO isdao = new InputStockDAO();
+		newStock = isdao.inputStock(id, addStockQuantity);
+		switch (newStock) {
+		case -1:
+			return "stockShortageError.jsp"; // 商品不明
+		case 0:
+			return "stockUpdateError.jsp"; // 在庫更新エラー
+		default:
+			// レスポンス用にセッションで管理中の在庫を更新（"LIST"の要素：List<Stock>）
+			for (Stock stock : stocklist) {
+				if (stock.getId() == id) {
+					stock.setStock(newStock);
+					break;
 				}
-				// 更新された在庫数をセッション属性の在庫インスタンスにセット
-				stock.setStock(recount);
-				break;	
 			}
 		}
-		// 更新された在庫数を商品DBへ登録
-		ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
-		int line = psrdao.r️egister(id, recount);
-
-		if (line != 1) {
-			return "/owner/stock-register-error.jsp";
-		}
-
 		return "stockstatus.jsp";
 	}
 }

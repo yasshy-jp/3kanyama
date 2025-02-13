@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import bean.Item;
-import dao.ProductStockRegisterDAO;
+import dao.InputStockDAO;
 import tool.Action;
 //カート内の商品を削除するクラス
 public class CartRemoveAction extends Action {
@@ -21,21 +21,23 @@ public class CartRemoveAction extends Action {
 		
 		for (Item item : cart) {
 			if (item.getProduct().getId() == id) {
-				// カート内の合計個数と金額を再計算
-				totalPrice_taxIn -= (int)(item.getProduct().getPrice() * item.getCount() * 1.1);
-				totalCount -= item.getCount();
-				// セッションスコープへ格納
-				session.setAttribute("TOTALPRICE_TAXIN", totalPrice_taxIn);
-				session.setAttribute("TOTALCOUNT", totalCount);
-				
-				// 商品DBの在庫の更新
-				int stock = item.getProduct().getStock() + item.getCount();
-				ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
-				int line = psrdao.r️egister(id, stock);
-				if (line != 1) return "stock-register-error.jsp";
-				
-				// セッションに保存中の商品（"LIST"の要素）の在庫更新
-				item.getProduct().setStock(stock);
+				int returnedQuantity = item.getCount();
+
+				// 商品DBの在庫の更新（返却）
+				InputStockDAO isdao = new InputStockDAO();
+				int newStock = isdao.inputStock(id, returnedQuantity);
+				switch (newStock) {
+				case -1:
+					return "stockShortageError.jsp"; // 商品不明
+				case 0:
+					return "cartRemoveError.jsp"; // 在庫更新エラー
+				default:
+					// カート内の合計個数と金額を再計算
+					totalPrice_taxIn -= (int)(item.getProduct().getPrice() * item.getCount() * 1.1);
+					totalCount -= item.getCount();
+					// 商品画面出力用にセッションで管理中の在庫を更新（"LIST"の要素：List<Product>）
+					item.getProduct().setStock(newStock);
+				}								
 				// 動作確認用コード
 				System.out.println("「" + item.getProduct().getName() + "」を削除。在庫が「"
 				+ item.getProduct().getStock() + "個」に復活。");
@@ -44,6 +46,9 @@ public class CartRemoveAction extends Action {
 				break;
 			}
 		}
+		// セッションスコープへ格納
+		session.setAttribute("TOTALPRICE_TAXIN", totalPrice_taxIn);
+		session.setAttribute("TOTALCOUNT", totalCount);
 		return "cart.jsp";
 	}
 }

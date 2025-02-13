@@ -13,7 +13,7 @@
          		<a href = "OrderStatus.action">受注状況へ</a>
          		<br>
          		<br>
-         		<a href = "StockStatus.action">在庫状況へ</a>
+         		<a href = "StockStatus.action">在庫管理へ</a>
           	</div>
         </div>
     </div>

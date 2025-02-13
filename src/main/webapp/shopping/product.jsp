@@ -74,8 +74,8 @@
 									<c:when test="${product.stock>0}">
 										<form action="CartAdd.action" method="post">
 											<input type="hidden" name="id" value="${product.id}">
-											<label for="addQuantity${product.id}">数量:</label>
-											<select name="addQuantity" id="addQuantity${product.id}">
+											<label for="additionalQuantity${product.id}">数量:</label>
+											<select name="additionalQuantity" id="additionalQuantity${product.id}">
 												<%-- 繰り返し回数の指定（SBC P341）--%>
 												<c:forEach var="i" begin="1" end="20">
 													<option value="${i}">${i}</option>
@@ -87,8 +87,8 @@
 									<%-- 在庫なしのUI --%>
 									<c:otherwise>
 										<div>
-											<label for="addQuantity${product.id}">数量:</label>
-											<select name="addQuantity" id="addQuantity${product.id}" disabled>
+											<label for="additionalQuantity${product.id}">数量:</label>
+											<select name="additionalQuantity" id="additionalQuantity${product.id}" disabled>
 												<%-- 空白を示す文字エンティティ：&ensp; --%>
 												<option value="0">0&ensp;</option>
 											</select>

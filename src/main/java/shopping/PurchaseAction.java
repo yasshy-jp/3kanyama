@@ -11,9 +11,9 @@ import bean.Item;
 import bean.Member;
 import bean.Product;
 import dao.MemberAddRegisterDAO;
+import dao.OutputStockDAO;
 import dao.ProceedsDAO;
 import dao.ProductSearchDAO;
-import dao.ProductStockRegisterDAO;
 import dao.PurchaseDAO;
 import jp.pay.Payjp;
 import jp.pay.model.Card;
@@ -141,7 +141,7 @@ public class PurchaseAction extends Action {
 			
 			/*** (5) 在庫の減算 *************************************************************************************/
 			// 在庫登録用DAOの取得
-			ProductStockRegisterDAO psrdao = new ProductStockRegisterDAO();
+			OutputStockDAO psrdao = new OutputStockDAO();
 			// 最新の商品リストの在庫で、カートに追加した個数を賄えるか確認
 			for (Item item : cart) {
 				// 購入商品のID取得
@@ -153,7 +153,7 @@ public class PurchaseAction extends Action {
 						int stock = p.getStock();
 						stock -= count;
 						// 商品DBの在庫情報を更新
-						int line = psrdao.r️egister(id, stock);
+						int line = psrdao.outputStock(id, stock);
 						if (line != 1) {
 							return "stock-register-error.jsp";
 						}
