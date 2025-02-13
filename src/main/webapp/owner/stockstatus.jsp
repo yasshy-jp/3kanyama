@@ -23,8 +23,8 @@
 									<td>${stock.stock}</td>
 									<td>
 										<form action = "StockRecount.action?id=${stock.id}" method = "post">
-											<input type = "text" name = "stadd">
-											<input type = "submit" value = "更新">
+											<input type = "text" name = "addStockQuantity">
+											<input type = "submit" value = "補充">
 										</form>
 									</td>
 								</tr>
