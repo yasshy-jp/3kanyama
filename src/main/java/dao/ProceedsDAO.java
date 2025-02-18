@@ -9,7 +9,7 @@ import bean.Member;
 import jp.pay.model.Charge;
 
 public class ProceedsDAO extends DAO {
-	public boolean insert(Charge charge, Member member, String price) throws Exception {
+	public boolean insert(Charge charge, Member member, Integer price) throws Exception {
 		Connection con = getConnection();
 		con.setAutoCommit(false);
 		// 購入日時を生成
@@ -22,7 +22,7 @@ public class ProceedsDAO extends DAO {
 		st.setString(1, charge.getId());
 		st.setString(2, s);
 		st.setInt(3, member.getId());
-		st.setString(4, price);
+		st.setInt(4, price);
 		int line = st.executeUpdate();
 		st.close();
 

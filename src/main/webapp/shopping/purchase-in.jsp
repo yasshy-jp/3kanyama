@@ -31,7 +31,6 @@
 							</script>
 							<hr>
 							<input type="checkbox" name="registerCard"> カード情報を登録
-							<input type="hidden" name="price" value="${TOTALPRICE_TAXIN}">
 							<p> ＊次回購入より入力不要でお支払いいただけます。</p>
 							<hr>
 							<input type="submit" value="支払いを確定" class="btn btnBig c️onfirm">
