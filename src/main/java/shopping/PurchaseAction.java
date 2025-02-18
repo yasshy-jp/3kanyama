@@ -23,7 +23,6 @@ public class PurchaseAction extends Action {
 	public String execute(HttpServletRequest request) throws Exception {
 		
 		HttpSession session = request.getSession();
-		
 		String payjpToken = request.getParameter("payjp-token");  // カード情報入力後、生成されたトークン
 		String registerCard = request.getParameter("registerCard");  // 顧客情報（カード）登録希望の有無
 		Integer price = (Integer) session.getAttribute("TOTALPRICE_TAXIN"); // 合計金額
@@ -68,10 +67,11 @@ public class PurchaseAction extends Action {
 		// ↓ マップ形式で支払いオブジェクトの各種プロパティ値を設定。詳細はPAY.JP API参照。
 		// https://pay.jp/docs/api/?java#%E6%94%AF%E6%89%95%E3%81%84%E3%82%92%E4%BD%9C%E6%88%90
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
-		chargeParams.put(property, value); // パラメータで支払い方法設定（顧客IDに紐づく登録済みカード or 1回限り有効のトークン）
+		chargeParams.put(property, value); // 支払い方法（顧客ID or 1回限り有効のトークン）
 		chargeParams.put("amount", price);
 		chargeParams.put("currency", "jpy");
 		chargeParams.put("capture", "false"); // カードの認証と支払い額の確保のみ行う設定
+//		chargeParams.put("three_d_secure", "true"); // 3Dセキュアフロー開始
 
 		try {
 			charge = Charge.create(chargeParams);
