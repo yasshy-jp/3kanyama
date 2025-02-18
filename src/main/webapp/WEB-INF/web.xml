@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- 本ファイルはWebアプリケーションの動作設定を行うファイル（ｐ５８） 自動リロードの対象となる。ServletのURL、フィルタ、初期化パラメータの設定など -->
+<!-- WebAppの動作設定を行うファイル（P58）自動リロードの対象。ServletのURL、フィルタ、初期化パラメータの設定など -->
 <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
