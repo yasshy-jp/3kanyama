@@ -11,7 +11,7 @@
         <%-- フリーアイコン読み込み設定。＊読込み位置によりdisplay:プロパティでの要素の表示に影響あり --%>
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-        <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/normalize.css">
+        <link rel="stylesheet" type="text/css" href="/mikyans/common/css/normalize.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/style.css">
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/common/css/responsive.css">
         <%-- 使用するライブラリ jQuery, stickfill.jsの読込み ＊jqを利用するFileより前で読み込むこと --%>
