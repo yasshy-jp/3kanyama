@@ -13,7 +13,7 @@ public class ProductSearchDAO extends DAO {
 	public List<Product> search(int category, String keyword) throws Exception {
 		List<Product> list=new ArrayList<>();
 
-		Connection con=getConnection();
+		Connection con=getConnection(); // コネクションオブジェクト（プール）の取得
 
 		PreparedStatement st=con.prepareStatement(
 			"select * from farmproduct where name like ? or category_id=?");
