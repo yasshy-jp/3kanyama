@@ -15,11 +15,14 @@ public class ProductSearchDAO extends DAO {
 
 		Connection con=getConnection(); // コネクションオブジェクト（プール）の取得
 
+		// SQL文をDBへ送るためのPreparedStatementオブジェクトの生成。
 		PreparedStatement st=con.prepareStatement(
 			"select * from farmproduct where name like ? or category_id=?");
 		st.setString(1, "%"+keyword+"%");
 		st.setInt(2, category);
-		ResultSet rs=st.executeQuery(); // DB検索結果オブジェクトを返す(p202参照)
+		
+		// PreparedStatementオブジェクトのSQL文の実行。結果が格納されたResultSetオブジェクトが返る。
+		ResultSet rs=st.executeQuery();
 
 		while (rs.next()) {
 			Product p=new Product();
