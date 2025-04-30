@@ -44,7 +44,8 @@
 											数量:
 											<select name = "recount" class="recount">
 											<%-- 三項演算子(p324)とSelected属性により、ページ読み込み時点での選択個数を予め表示 --%>
-												<c:forEach var = "i" begin = "1" end = "20">
+												<c:set var="maxCount" value="${item.count > 20 ? item.count : 20}" />
+												<c:forEach var = "i" begin = "1" end = "${maxCount}">
 													<option value = "${i}" ${item.count == i ? "selected = \"selected\"" : ""}>${i}</option>
 												</c:forEach>
 											</select>
