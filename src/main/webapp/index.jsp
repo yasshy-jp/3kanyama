@@ -15,7 +15,7 @@
                     <a href="${pageContext.request.contextPath}/business/" class="btn line">
                         <i class="fab fa-line"></i>
                     </a>
-                    <a href="https://www.instagram.com/yasshy_jp" class="btn instagram">
+                    <a href="https://www.instagram.com/yassy_jpn" class="btn instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>
