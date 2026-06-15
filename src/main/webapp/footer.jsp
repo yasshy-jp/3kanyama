@@ -11,7 +11,7 @@
 	                    <i class="fab fa-line"></i>
 	                </a>
 	                <span class="void_sns"></span>
-	                <a href="https://www.instagram.com/yasshy_jp" class="icon">
+	                <a href="https://www.instagram.com/yassy_jpn" class="icon">
 	                    <i class="fab fa-instagram"></i>
 	                </a>
 	            </div>
