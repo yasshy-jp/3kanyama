@@ -17,7 +17,7 @@
 	            </div>
 	            <div id="copyright">
 	                <small>
-	                    <i class="far fa-copyright"></i> 3kanyama.com All Rights Reserved.
+	                    <i class="far fa-copyright"></i> mikyans.com All Rights Reserved.
 	                </small>
 	            </div>
             </footer>
